@@ -17,6 +17,8 @@
 		B32897C627FB62BA007CFBF6 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C527FB62BA007CFBF6 /* LocationListView.swift */; };
 		B32897C827FB62CB007CFBF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C727FB62CB007CFBF6 /* ProfileView.swift */; };
 		B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64C27FB67D600301E3A /* LocationListCell.swift */; };
+		B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64E27FB724000301E3A /* LocationDetailView.swift */; };
+		B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		B32897C527FB62BA007CFBF6 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		B32897C727FB62CB007CFBF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B3DEA64C27FB67D600301E3A /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
+		B3DEA64E27FB724000301E3A /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameAvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,7 @@
 				B32897C327FB629F007CFBF6 /* LocationMapView.swift */,
 				B32897C527FB62BA007CFBF6 /* LocationListView.swift */,
 				B32897C727FB62CB007CFBF6 /* ProfileView.swift */,
+				B3DEA64E27FB724000301E3A /* LocationDetailView.swift */,
 			);
 			path = DubDubGrub;
 			sourceTree = "<group>";
@@ -100,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				B3DEA64C27FB67D600301E3A /* LocationListCell.swift */,
+				B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -175,7 +181,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B32897AE27FB4D5C007CFBF6 /* DubDubGrubApp.swift in Sources */,
+				B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */,
 				B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */,
+				B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */,
 				B32897C627FB62BA007CFBF6 /* LocationListView.swift in Sources */,
 				B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */,
 				B32897C227FB6262007CFBF6 /* AppTabView.swift in Sources */,
