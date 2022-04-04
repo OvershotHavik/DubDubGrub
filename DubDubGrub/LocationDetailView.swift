@@ -29,8 +29,8 @@ struct LocationDetailView: View {
                 .lineLimit(3)
                 .minimumScaleFactor(0.75)
                 .multilineTextAlignment(.leading)
-            
-            
+                .frame(height: 70)
+                        
             LocationButtonsHStack()
             
             Text("Who's Here?")
@@ -56,7 +56,9 @@ struct LocationDetailView: View {
 
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        LocationDetailView(title: "Chipotle", address: "1 S Market St Ste 40", description: "It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh saidIt's Chipotle. ENugh said")
+        NavigationView{
+            LocationDetailView(title: "Chipotle", address: "1 S Market St Ste 40", description: "It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh saidIt's Chipotle. ENugh said")
+        }
     }
 }
 
