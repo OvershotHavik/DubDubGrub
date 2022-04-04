@@ -24,6 +24,7 @@ struct LocationMapView: View {
                     .scaledToFit()
                     .frame(height: 70)
                     .shadow(radius: 10)
+                
                 Spacer()
             }
         }
