@@ -40,15 +40,4 @@ struct LocationListCell_Previews: PreviewProvider {
     }
 }
 
-struct AvatarView: View {
-    var avatar: UIImage = UIImage(named: "default-avatar")!
-    var size: CGFloat
-    
-    var body: some View {
-        Image(uiImage: avatar)
-            .resizable()
-            .scaledToFit()
-            .clipShape(Circle())
-            .frame(width: size, height: size)
-    }
-}
+

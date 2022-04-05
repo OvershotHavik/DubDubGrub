@@ -23,7 +23,7 @@ struct FirstNameAvatarView: View {
     }
 }
 
-struct AvatarCell_Previews: PreviewProvider {
+struct FirstNameAvatarView_Previews: PreviewProvider {
     static var previews: some View {
         FirstNameAvatarView(firstName: "Steve")
     }

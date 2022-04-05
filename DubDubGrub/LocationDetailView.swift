@@ -15,21 +15,12 @@ struct LocationDetailView: View {
     
     var body: some View {
         VStack(spacing: 16){
-            Image("default-banner-asset")
-                .resizable()
-                .scaledToFill()
-                .frame(height: 120)
+            BannerImageView(imageName: "default-banner-asset")
             HStack{
-                Label(address, systemImage: "mappin.and.ellipse")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                AddressView(address: address)
                 Spacer()
             }
-            Text(description)
-                .lineLimit(3)
-                .minimumScaleFactor(0.75)
-                .multilineTextAlignment(.leading)
-                .frame(height: 70)
+            DescriptionView(description: description)
                         
             LocationButtonsHStack()
             
@@ -53,6 +44,7 @@ struct LocationDetailView: View {
         
     }
 }
+
 
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
@@ -99,7 +91,6 @@ struct LocationButtonsHStack: View {
 }
 
 
-
 struct LocationActionButton: View {
     var sfSymbole: String
     var color: Color
@@ -116,5 +107,42 @@ struct LocationActionButton: View {
                 .foregroundColor(.white)
                 .frame(width: 22, height: 22)
         }
+    }
+}
+
+
+struct BannerImageView: View {
+    var imageName: String
+    var body: some View {
+        Image(imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(height: 120)
+    }
+}
+
+
+struct AddressView: View {
+    
+    var address: String
+    
+    var body: some View {
+        Label(address, systemImage: "mappin.and.ellipse")
+            .font(.caption)
+            .foregroundColor(.secondary)
+    }
+}
+
+
+struct DescriptionView: View {
+    
+    var description: String
+    
+    var body: some View {
+        Text(description)
+            .lineLimit(3)
+            .minimumScaleFactor(0.75)
+            .multilineTextAlignment(.leading)
+            .frame(height: 70)
     }
 }
