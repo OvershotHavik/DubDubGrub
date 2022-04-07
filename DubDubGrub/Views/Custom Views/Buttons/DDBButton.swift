@@ -22,6 +22,6 @@ struct DDGButton: View {
 
 struct DDBButton_Previews: PreviewProvider {
     static var previews: some View {
-        DDBButton()
+        DDGButton(title: "Testing Button")
     }
 }

@@ -24,6 +24,7 @@
 		B3DEA65927FCD71500301E3A /* ProfileNameText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65827FCD71500301E3A /* ProfileNameText.swift */; };
 		B3DEA65C27FCD77C00301E3A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65B27FCD77C00301E3A /* View+Ext.swift */; };
 		B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65E27FCD94D00301E3A /* DDBButton.swift */; };
+		B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA66327FF78A200301E3A /* DDGLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		B3DEA65827FCD71500301E3A /* ProfileNameText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameText.swift; sourceTree = "<group>"; };
 		B3DEA65B27FCD77C00301E3A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		B3DEA65E27FCD94D00301E3A /* DDBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDBButton.swift; sourceTree = "<group>"; };
+		B3DEA66327FF78A200301E3A /* DDGLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		B32897AC27FB4D5C007CFBF6 /* DubDubGrub */ = {
 			isa = PBXGroup;
 			children = (
+				B3DEA66227FF788D00301E3A /* Model */,
 				B3DEA65A27FCD75000301E3A /* Extensions */,
 				B3DEA65227FCD5CC00301E3A /* Views */,
 				B32897BB27FB5F71007CFBF6 /* DubDubGrub.entitlements */,
@@ -173,6 +176,14 @@
 			path = "Custom Views";
 			sourceTree = "<group>";
 		};
+		B3DEA66227FF788D00301E3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3DEA66327FF78A200301E3A /* DDGLocation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -247,6 +258,7 @@
 				B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */,
 				B3DEA65627FCD60300301E3A /* LogoView.swift in Sources */,
 				B3DEA65927FCD71500301E3A /* ProfileNameText.swift in Sources */,
+				B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */,
 				B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */,
 				B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */,
 				B3DEA65427FCD5DF00301E3A /* AvatarView.swift in Sources */,
