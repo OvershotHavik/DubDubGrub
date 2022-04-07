@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LocationListCell: View {
-    var title: String
+    var location: DDGLocation
     
     var body: some View {
             HStack{
@@ -19,7 +19,7 @@ struct LocationListCell: View {
                     .frame(width: 80, height: 80)
                     
                 VStack(alignment: .leading){
-                    Text(title)
+                    Text(location.name)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .lineSpacing(1)
@@ -36,7 +36,7 @@ struct LocationListCell: View {
 
 struct LocationListCell_Previews: PreviewProvider {
     static var previews: some View {
-        LocationListCell(title: "Chipotle")
+        LocationListCell(location: DDGLocation(record: MockData.location))
     }
 }
 

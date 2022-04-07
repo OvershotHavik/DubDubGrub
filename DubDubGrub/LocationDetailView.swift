@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct LocationDetailView: View {
-    var title: String
-    var address: String
-    var description: String
+    var location: DDGLocation
     let column = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         VStack(spacing: 16){
             BannerImageView(imageName: "default-banner-asset")
             HStack{
-                AddressView(address: address)
+                AddressView(address: location.address)
                 Spacer()
             }
-            DescriptionView(description: description)
+            DescriptionView(description: location.description)
                         
-            LocationButtonsHStack()
+            LocationButtonsHStack(location: location)
             
             Text("Who's Here?")
                 .bold()
@@ -39,7 +37,7 @@ struct LocationDetailView: View {
             Spacer()
         }
         .padding(.horizontal)
-        .navigationTitle(title)
+        .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.inline)
         
     }
@@ -49,14 +47,14 @@ struct LocationDetailView: View {
 struct LocationDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
-            LocationDetailView(title: "Chipotle", address: "1 S Market St Ste 40", description: "It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh said,It's Chipotle. ENugh saidIt's Chipotle. ENugh said")
+            LocationDetailView(location: DDGLocation(record: MockData.location))
         }
     }
 }
 
 
 struct LocationButtonsHStack: View {
-    
+    var location: DDGLocation
     var body: some View {
         ZStack{
             Capsule()
@@ -70,7 +68,7 @@ struct LocationButtonsHStack: View {
                 }
                 
                 
-                Link(destination: URL(string: "https://www.apple.com")!) {
+                Link(destination: URL(string: location.websiteURL)!) {
                     LocationActionButton(sfSymbole: "network", color: Color.brandPrimary)
                 }
                 
