@@ -24,7 +24,7 @@ struct LocationMapView: View {
                 .ignoresSafeArea()
             
             VStack{
-                LogoView()
+                LogoView(frameWidth: 125)
                     .shadow(radius: 10)
 
                 Spacer()
