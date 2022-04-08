@@ -12,7 +12,7 @@ struct LocationListCell: View {
     
     var body: some View {
             HStack{
-             Image("default-square-asset")
+                Image(uiImage: location.createSquareImage())
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
@@ -22,7 +22,7 @@ struct LocationListCell: View {
                     Text(location.name)
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .lineSpacing(1)
+                        .lineLimit(1)
                         .minimumScaleFactor(0.75)
                     HStack{
                         AvatarView(size: 35)
@@ -34,10 +34,5 @@ struct LocationListCell: View {
     }
 }
 
-struct LocationListCell_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationListCell(location: DDGLocation(record: MockData.location))
-    }
-}
 
 

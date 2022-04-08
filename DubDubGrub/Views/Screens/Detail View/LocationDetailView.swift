@@ -13,7 +13,8 @@ struct LocationDetailView: View {
     
     var body: some View {
         VStack(spacing: 16){
-            BannerImageView(imageName: "default-banner-asset")
+            BannerImageView(image: location.createBannerImage())
+            
             HStack{
                 AddressView(address: location.address)
                 Spacer()
@@ -40,15 +41,6 @@ struct LocationDetailView: View {
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.inline)
 
-    }
-}
-
-
-struct LocationDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView{
-            LocationDetailView(location: DDGLocation(record: MockData.location))
-        }
     }
 }
 
@@ -110,9 +102,11 @@ struct LocationActionButton: View {
 
 
 struct BannerImageView: View {
-    var imageName: String
+    
+    var image: UIImage
+    
     var body: some View {
-        Image(imageName)
+        Image(uiImage: image)
             .resizable()
             .scaledToFill()
             .frame(height: 120)
