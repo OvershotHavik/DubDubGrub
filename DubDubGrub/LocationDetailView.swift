@@ -39,7 +39,7 @@ struct LocationDetailView: View {
         .padding(.horizontal)
         .navigationTitle(location.name)
         .navigationBarTitleDisplayMode(.inline)
-        
+
     }
 }
 

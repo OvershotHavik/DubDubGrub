@@ -18,6 +18,9 @@
 		B32897C827FB62CB007CFBF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C727FB62CB007CFBF6 /* ProfileView.swift */; };
 		B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */; };
 		B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10E27FF7FA2002AD6CE /* MockData.swift */; };
+		B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11228009529002AD6CE /* CloudKitManager.swift */; };
+		B3AEC115280095FE002AD6CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC114280095FE002AD6CE /* Constants.swift */; };
+		B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */; };
 		B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64C27FB67D600301E3A /* LocationListCell.swift */; };
 		B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64E27FB724000301E3A /* LocationDetailView.swift */; };
 		B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */; };
@@ -43,6 +46,9 @@
 		B32897C727FB62CB007CFBF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGProfile.swift; sourceTree = "<group>"; };
 		B3AEC10E27FF7FA2002AD6CE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		B3AEC11228009529002AD6CE /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		B3AEC114280095FE002AD6CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKRecord+Ext.swift"; sourceTree = "<group>"; };
 		B3DEA64C27FB67D600301E3A /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
 		B3DEA64E27FB724000301E3A /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameAvatarView.swift; sourceTree = "<group>"; };
@@ -86,8 +92,8 @@
 		B32897AC27FB4D5C007CFBF6 /* DubDubGrub */ = {
 			isa = PBXGroup;
 			children = (
+				B3AEC110280094F2002AD6CE /* Utilities */,
 				B3DEA66227FF788D00301E3A /* Model */,
-				B3DEA65A27FCD75000301E3A /* Extensions */,
 				B3DEA65227FCD5CC00301E3A /* Views */,
 				B32897BB27FB5F71007CFBF6 /* DubDubGrub.entitlements */,
 				B32897AD27FB4D5C007CFBF6 /* DubDubGrubApp.swift */,
@@ -112,6 +118,24 @@
 				B32897BD27FB5F7B007CFBF6 /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B3AEC110280094F2002AD6CE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B3AEC11128009516002AD6CE /* Managers */,
+				B3DEA65A27FCD75000301E3A /* Extensions */,
+				B3AEC114280095FE002AD6CE /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B3AEC11128009516002AD6CE /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B3AEC11228009529002AD6CE /* CloudKitManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		B3DEA64B27FB679A00301E3A /* Cells */ = {
@@ -146,6 +170,7 @@
 			children = (
 				B32897BF27FB620C007CFBF6 /* Color+Ext.swift */,
 				B3DEA65B27FCD77C00301E3A /* View+Ext.swift */,
+				B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -261,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B32897AE27FB4D5C007CFBF6 /* DubDubGrubApp.swift in Sources */,
+				B3AEC115280095FE002AD6CE /* Constants.swift in Sources */,
 				B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */,
 				B3DEA65627FCD60300301E3A /* LogoView.swift in Sources */,
 				B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */,
@@ -268,10 +294,12 @@
 				B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */,
 				B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */,
 				B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */,
+				B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */,
 				B3DEA65427FCD5DF00301E3A /* AvatarView.swift in Sources */,
 				B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */,
 				B32897C627FB62BA007CFBF6 /* LocationListView.swift in Sources */,
 				B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */,
+				B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */,
 				B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */,
 				B32897C227FB6262007CFBF6 /* AppTabView.swift in Sources */,
 				B32897C827FB62CB007CFBF6 /* ProfileView.swift in Sources */,
