@@ -16,6 +16,8 @@
 		B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C327FB629F007CFBF6 /* LocationMapView.swift */; };
 		B32897C627FB62BA007CFBF6 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C527FB62BA007CFBF6 /* LocationListView.swift */; };
 		B32897C827FB62CB007CFBF6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32897C727FB62CB007CFBF6 /* ProfileView.swift */; };
+		B32D5A7228009E9200AF241E /* LocationMapVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A7128009E9200AF241E /* LocationMapVM.swift */; };
+		B32D5A742800A31B00AF241E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A732800A31B00AF241E /* LocationManager.swift */; };
 		B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */; };
 		B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10E27FF7FA2002AD6CE /* MockData.swift */; };
 		B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11228009529002AD6CE /* CloudKitManager.swift */; };
@@ -45,6 +47,8 @@
 		B32897C327FB629F007CFBF6 /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 		B32897C527FB62BA007CFBF6 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		B32897C727FB62CB007CFBF6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B32D5A7128009E9200AF241E /* LocationMapVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapVM.swift; sourceTree = "<group>"; };
+		B32D5A732800A31B00AF241E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGProfile.swift; sourceTree = "<group>"; };
 		B3AEC10E27FF7FA2002AD6CE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		B3AEC11228009529002AD6CE /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -122,6 +126,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B32D5A6E28009E5000AF241E /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				B32D5A7128009E9200AF241E /* LocationMapVM.swift */,
+				B32897C327FB629F007CFBF6 /* LocationMapView.swift */,
+			);
+			path = "Map View";
+			sourceTree = "<group>";
+		};
+		B32D5A6F28009E6000AF241E /* List View */ = {
+			isa = PBXGroup;
+			children = (
+				B32897C527FB62BA007CFBF6 /* LocationListView.swift */,
+			);
+			path = "List View";
+			sourceTree = "<group>";
+		};
+		B32D5A7028009E6C00AF241E /* Profile View */ = {
+			isa = PBXGroup;
+			children = (
+				B32897C727FB62CB007CFBF6 /* ProfileView.swift */,
+			);
+			path = "Profile View";
+			sourceTree = "<group>";
+		};
 		B3AEC110280094F2002AD6CE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				B3AEC11228009529002AD6CE /* CloudKitManager.swift */,
+				B32D5A732800A31B00AF241E /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -198,9 +228,9 @@
 			isa = PBXGroup;
 			children = (
 				B32897C127FB6262007CFBF6 /* AppTabView.swift */,
-				B32897C327FB629F007CFBF6 /* LocationMapView.swift */,
-				B32897C527FB62BA007CFBF6 /* LocationListView.swift */,
-				B32897C727FB62CB007CFBF6 /* ProfileView.swift */,
+				B32D5A6E28009E5000AF241E /* Map View */,
+				B32D5A6F28009E6000AF241E /* List View */,
+				B32D5A7028009E6C00AF241E /* Profile View */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -300,8 +330,10 @@
 				B3AEC115280095FE002AD6CE /* Constants.swift in Sources */,
 				B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */,
 				B3DEA65627FCD60300301E3A /* LogoView.swift in Sources */,
+				B32D5A7228009E9200AF241E /* LocationMapVM.swift in Sources */,
 				B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */,
 				B3DEA65927FCD71500301E3A /* ProfileNameText.swift in Sources */,
+				B32D5A742800A31B00AF241E /* LocationManager.swift in Sources */,
 				B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */,
 				B3AEC11A28009B9B002AD6CE /* AlertItem.swift in Sources */,
 				B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */,
