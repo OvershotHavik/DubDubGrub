@@ -15,10 +15,12 @@ struct LocationMapView: View {
     var body: some View {
         ZStack {
             Map(coordinateRegion: $vm.region,
+                showsUserLocation: true,
                 annotationItems: lm.locations) { location in
 //                MapPin(coordinate: location.location.coordinate, tint: .brandPrimary)
                 MapMarker(coordinate: location.location.coordinate, tint: .brandPrimary)
             }
+                .accentColor(.grubRed)
                 .ignoresSafeArea()
             
             VStack{
@@ -29,6 +31,7 @@ struct LocationMapView: View {
             }
         }
         .onAppear{
+            vm.checkIfLocationServicesIsEnabled()
             if lm.locations.isEmpty{
                 vm.getLocations(for: lm)
             }
