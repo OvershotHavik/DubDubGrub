@@ -78,9 +78,6 @@ struct ProfileView: View {
             PhotoPicker(image: $vm.avatar)
         }
     }
-    
-    
-
 }
 
 

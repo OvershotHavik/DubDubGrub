@@ -97,13 +97,13 @@ final class ProfileVM: ObservableObject{
                         return
                     }
                     
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async {[self] in
                         let profile = DDGProfile(record: profileRecord)
-                        self.firstName = profile.firstName
-                        self.lastName = profile.lastName
-                        self.companyName = profile.companyName
-                        self.bio = profile.bio
-                        self.avatar = profile.createAvatarImage()
+                        firstName = profile.firstName
+                        lastName = profile.lastName
+                        companyName = profile.companyName
+                        bio = profile.bio
+                        avatar = profile.createAvatarImage()
                     }
                 }
             }
