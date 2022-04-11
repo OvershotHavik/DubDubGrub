@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FirstNameAvatarView: View {
     var firstName: String
-    var avatar: UIImage = UIImage(named: "default-avatar")!
+    var image: UIImage
+//    var avatar: UIImage = UIImage(named: "default-avatar")!
     
     var body: some View {
         VStack{
-            AvatarView(size: 64)
+            AvatarView(image: image, size: 64)
             Text(firstName)
                 .fontWeight(.bold)
                 .minimumScaleFactor(0.75)
@@ -25,6 +26,6 @@ struct FirstNameAvatarView: View {
 
 struct FirstNameAvatarView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstNameAvatarView(firstName: "Steve")
+        FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
     }
 }

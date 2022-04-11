@@ -30,7 +30,7 @@ struct LocationDetailView: View {
             ScrollView{
                 LazyVGrid(columns: column) {
                     ForEach(0..<10) { item in
-                        FirstNameAvatarView(firstName: "Steve")
+                        FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
                     }
                 }
             }
