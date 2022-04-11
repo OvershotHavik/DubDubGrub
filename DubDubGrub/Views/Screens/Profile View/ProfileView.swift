@@ -11,52 +11,58 @@ struct ProfileView: View {
     @StateObject private var vm = ProfileVM()
     
     var body: some View {
-        VStack{
-            ZStack{
-                NameBackgroundView()
-                
-                HStack(spacing: 16){
-                    ZStack{
-                        AvatarView(image: vm.avatar, size: 84)
-                        EditImageView()
-                    }
-                    .padding(.leading, 12)
-                    .onTapGesture {
-                        vm.isShowingPhotoPicker = true
-                    }
+        ZStack {
+            VStack{
+                ZStack{
+                    NameBackgroundView()
                     
-                    
-                    VStack(spacing: 1){
-                        TextField("First Name", text: $vm.firstName)
-                            .profileNameStyle()
-                        TextField("Last Name", text: $vm.lastName)
-                            .profileNameStyle()
-                        TextField("Company Name", text: $vm.companyName)
-
+                    HStack(spacing: 16){
+                        ZStack{
+                            AvatarView(image: vm.avatar, size: 84)
+                            EditImageView()
+                        }
+                        .padding(.leading, 12)
+                        .onTapGesture {
+                            vm.isShowingPhotoPicker = true
+                        }
+                        
+                        
+                        VStack(spacing: 1){
+                            TextField("First Name", text: $vm.firstName)
+                                .profileNameStyle()
+                            TextField("Last Name", text: $vm.lastName)
+                                .profileNameStyle()
+                            TextField("Company Name", text: $vm.companyName)
+                            
+                        }
+                        .padding(.trailing, 16)
                     }
-                    .padding(.trailing, 16)
+                    .padding()
+                    
                 }
-                .padding()
+                VStack(alignment: .leading, spacing: 8){
+                    CharactersRemainView(currentCount: vm.bio.count)
+                    
+                    TextEditor(text: $vm.bio)
+                        .frame(height: 100)
+                        .overlay(RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.secondary, lineWidth: 1))
+                }
+                .padding(.horizontal, 16)
                 
-            }
-            VStack(alignment: .leading, spacing: 8){
-                CharactersRemainView(currentCount: vm.bio.count)
+                Spacer()
                 
-                TextEditor(text: $vm.bio)
-                    .frame(height: 100)
-                    .overlay(RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.secondary, lineWidth: 1))
+                Button{
+                    vm.createProfile()
+                } label: {
+                    DDGButton(title: "Create Profile")
+                }
+                .padding(.bottom)
             }
-            .padding(.horizontal, 16)
-            
-            Spacer()
-            
-            Button{
-                vm.createProfile()
-            } label: {
-                DDGButton(title: "Create Profile")
+            if vm.isLoading{
+                LoadingView()
             }
-            .padding(.bottom)
+            
         }
         .navigationTitle("Profile")
         .toolbar(content: {
