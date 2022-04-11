@@ -52,7 +52,7 @@ struct ProfileView: View {
             Spacer()
             
             Button{
-                vm.createProfile()
+//                vm.createProfile()
             } label: {
                 DDGButton(title: "Create Profile")
             }
@@ -66,6 +66,9 @@ struct ProfileView: View {
                 Image(systemName: "keyboard.chevron.compact.down")
             }
         })
+        .onAppear{
+            vm.getProfile()
+        }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,
                   message: alertItem.message,

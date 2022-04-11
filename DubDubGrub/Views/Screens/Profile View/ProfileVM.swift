@@ -70,10 +70,43 @@ final class ProfileVM: ObservableObject{
                 }
                 CKContainer.default().publicCloudDatabase.add(operation) // save as task.resume() on network calls
             }
-
         }
-        
-        
-
+    }
+    
+    
+    func getProfile(){
+        // get record ID
+        CKContainer.default().fetchUserRecordID { recordID, error in
+            guard let recordID = recordID, error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            // Get User record
+            CKContainer.default().publicCloudDatabase.fetch(withRecordID: recordID) { userRecord, error in
+                guard let userRecord = userRecord, error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                let profileReference = userRecord["userProfile"] as! CKRecord.Reference
+                let profileRecordID = profileReference.recordID
+                
+                CKContainer.default().publicCloudDatabase.fetch(withRecordID: profileRecordID) { profileRecord, error in
+                    guard let profileRecord = profileRecord, error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        let profile = DDGProfile(record: profileRecord)
+                        self.firstName = profile.firstName
+                        self.lastName = profile.lastName
+                        self.companyName = profile.companyName
+                        self.bio = profile.bio
+                        self.avatar = profile.createAvatarImage()
+                    }
+                }
+            }
+        }
     }
 }
