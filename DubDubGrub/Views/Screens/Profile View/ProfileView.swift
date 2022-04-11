@@ -52,7 +52,7 @@ struct ProfileView: View {
             Spacer()
             
             Button{
-//                vm.createProfile()
+                vm.createProfile()
             } label: {
                 DDGButton(title: "Create Profile")
             }

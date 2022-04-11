@@ -61,7 +61,7 @@ final class LocationMapVM: NSObject, ObservableObject{
     
     
     func getLocations(for locationManager: LocationManager){
-        CloudKitManager.getLocations { [self] result in
+        CloudKitManager.shared.getLocations { [self] result in
             DispatchQueue.main.async {
                 switch result{
                 case .success(let locations):
