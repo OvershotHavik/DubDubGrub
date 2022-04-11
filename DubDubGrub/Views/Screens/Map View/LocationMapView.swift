@@ -17,7 +17,6 @@ struct LocationMapView: View {
             Map(coordinateRegion: $vm.region,
                 showsUserLocation: true,
                 annotationItems: lm.locations) { location in
-//                MapPin(coordinate: location.location.coordinate, tint: .brandPrimary)
                 MapMarker(coordinate: location.location.coordinate, tint: .brandPrimary)
             }
                 .accentColor(.grubRed)
@@ -30,8 +29,11 @@ struct LocationMapView: View {
                 Spacer()
             }
         }
+        .sheet(isPresented: $vm.isShowingOnboardView, onDismiss: vm.checkIfLocationServicesIsEnabled) {
+            OnboardingView(isShowingOnboardView: $vm.isShowingOnboardView)
+        }
         .onAppear{
-            vm.checkIfLocationServicesIsEnabled()
+            vm.runStartupChecks()
             if lm.locations.isEmpty{
                 vm.getLocations(for: lm)
             }

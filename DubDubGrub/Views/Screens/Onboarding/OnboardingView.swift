@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    @Binding var isShowingOnboardView: Bool
+    
     var body: some View {
         VStack{
             HStack{
                 Spacer()
                 Button {
-                    
+                    isShowingOnboardView = false
                 } label: {
                     XDismissButton()
+                        .padding()
                 }
             }
             Spacer()
@@ -25,9 +28,11 @@ struct OnboardingView: View {
                 OnboardInfoView(sfSymbol: "building.2.crop.circle",
                                 title: "Restaurant Locations",
                                 description: "Find places to dine around the convention center")
+                
                 OnboardInfoView(sfSymbol: "checkmark.circle",
                                 title: "Check In",
                                 description: "Let other iOS Devs know where you are")
+                
                 OnboardInfoView(sfSymbol: "person.2.circle",
                                 title: "Find Friends",
                                 description: "See where other iOS Devs are and join the party")
@@ -40,7 +45,7 @@ struct OnboardingView: View {
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView()
+        OnboardingView(isShowingOnboardView: .constant(true))
     }
 }
 
