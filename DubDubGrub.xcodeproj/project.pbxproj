@@ -22,6 +22,7 @@
 		B32D5A7C2800C49400AF241E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A7B2800C49400AF241E /* OnboardingView.swift */; };
 		B32D5A7E2800C86900AF241E /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A7D2800C86900AF241E /* XDismissButton.swift */; };
 		B32D5A812804903E00AF241E /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A802804903E00AF241E /* PhotoPicker.swift */; };
+		B32D5A832804A47B00AF241E /* ProfileVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D5A822804A47B00AF241E /* ProfileVM.swift */; };
 		B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */; };
 		B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10E27FF7FA2002AD6CE /* MockData.swift */; };
 		B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11228009529002AD6CE /* CloudKitManager.swift */; };
@@ -57,6 +58,7 @@
 		B32D5A7B2800C49400AF241E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B32D5A7D2800C86900AF241E /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 		B32D5A802804903E00AF241E /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		B32D5A822804A47B00AF241E /* ProfileVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVM.swift; sourceTree = "<group>"; };
 		B3AEC10C27FF7D6F002AD6CE /* DDGProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGProfile.swift; sourceTree = "<group>"; };
 		B3AEC10E27FF7FA2002AD6CE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		B3AEC11228009529002AD6CE /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		B32D5A7028009E6C00AF241E /* Profile View */ = {
 			isa = PBXGroup;
 			children = (
+				B32D5A822804A47B00AF241E /* ProfileVM.swift */,
 				B32897C727FB62CB007CFBF6 /* ProfileView.swift */,
 			);
 			path = "Profile View";
@@ -388,6 +391,7 @@
 				B32897C227FB6262007CFBF6 /* AppTabView.swift in Sources */,
 				B32897C827FB62CB007CFBF6 /* ProfileView.swift in Sources */,
 				B3DEA65C27FCD77C00301E3A /* View+Ext.swift in Sources */,
+				B32D5A832804A47B00AF241E /* ProfileVM.swift in Sources */,
 				B32897C027FB620C007CFBF6 /* Color+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var firstName = ""
-    @State private var lastName = ""
-    @State private var companyName = ""
-    @State private var bio = ""
-    @State private var avatar = PlaceholderImage.avatar
-    @State private var isShowingPhotoPicker = false
+    @StateObject private var vm = ProfileVM()
     
     var body: some View {
         VStack{
@@ -22,21 +17,21 @@ struct ProfileView: View {
                 
                 HStack(spacing: 16){
                     ZStack{
-                        AvatarView(image: avatar, size: 84)
+                        AvatarView(image: vm.avatar, size: 84)
                         EditImageView()
                     }
                     .padding(.leading, 12)
                     .onTapGesture {
-                        isShowingPhotoPicker = true
+                        vm.isShowingPhotoPicker = true
                     }
                     
                     
                     VStack(spacing: 1){
-                        TextField("First Name", text: $firstName)
+                        TextField("First Name", text: $vm.firstName)
                             .profileNameStyle()
-                        TextField("Last Name", text: $lastName)
+                        TextField("Last Name", text: $vm.lastName)
                             .profileNameStyle()
-                        TextField("Company Name", text: $companyName)
+                        TextField("Company Name", text: $vm.companyName)
 
                     }
                     .padding(.trailing, 16)
@@ -45,9 +40,9 @@ struct ProfileView: View {
                 
             }
             VStack(alignment: .leading, spacing: 8){
-                CharactersRemainView(currentCount: bio.count)
+                CharactersRemainView(currentCount: vm.bio.count)
                 
-                TextEditor(text: $bio)
+                TextEditor(text: $vm.bio)
                     .frame(height: 100)
                     .overlay(RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.secondary, lineWidth: 1))
@@ -57,16 +52,32 @@ struct ProfileView: View {
             Spacer()
             
             Button{
-                
+                vm.createProfile()
             } label: {
                 DDGButton(title: "Create Profile")
             }
+            .padding(.bottom)
         }
         .navigationTitle("Profile")
-        .sheet(isPresented: $isShowingPhotoPicker) {
-            PhotoPicker(image: $avatar)
+        .toolbar(content: {
+            Button {
+                dismissKeyboard()
+            } label: {
+                Image(systemName: "keyboard.chevron.compact.down")
+            }
+        })
+        .alert(item: $vm.alertItem, content: { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        })
+        .sheet(isPresented: $vm.isShowingPhotoPicker) {
+            PhotoPicker(image: $vm.avatar)
         }
     }
+    
+    
+
 }
 
 
