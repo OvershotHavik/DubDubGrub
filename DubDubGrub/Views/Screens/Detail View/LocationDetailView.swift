@@ -8,27 +8,26 @@
 import SwiftUI
 
 struct LocationDetailView: View {
-    var location: DDGLocation
-    let column = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    
+    @ObservedObject var vm : LocationDetailVM
+
     var body: some View {
         VStack(spacing: 16){
-            BannerImageView(image: location.createBannerImage())
+            BannerImageView(image: vm.location.createBannerImage())
             
             HStack{
-                AddressView(address: location.address)
+                AddressView(address: vm.location.address)
                 Spacer()
             }
-            DescriptionView(description: location.description)
+            DescriptionView(description: vm.location.description)
                         
-            LocationButtonsHStack(location: location)
+            LocationButtonsHStack(location: vm.location, vm: vm)
             
             Text("Who's Here?")
                 .bold()
                 .font(.title2)
             
             ScrollView{
-                LazyVGrid(columns: column) {
+                LazyVGrid(columns: vm.column) {
                     ForEach(0..<10) { item in
                         FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
                     }
@@ -37,8 +36,13 @@ struct LocationDetailView: View {
             
             Spacer()
         }
+        .alert(item: $vm.alertItem, content: { alertItem in
+            Alert(title: alertItem.title,
+                  message: alertItem.message,
+                  dismissButton: alertItem.dismissButton)
+        })
         .padding(.horizontal)
-        .navigationTitle(location.name)
+        .navigationTitle(vm.location.name)
         .navigationBarTitleDisplayMode(.inline)
 
     }
@@ -47,6 +51,8 @@ struct LocationDetailView: View {
 
 struct LocationButtonsHStack: View {
     var location: DDGLocation
+    var vm: LocationDetailVM
+    
     var body: some View {
         ZStack{
             Capsule()
@@ -54,26 +60,26 @@ struct LocationButtonsHStack: View {
                 .foregroundColor(Color(uiColor: .secondarySystemBackground))
             HStack(spacing: 20){
                 Button {
-                    
+                    vm.getDirectionsToLocation()
                 } label: {
-                    LocationActionButton(sfSymbole: "location.fill", color: Color.brandPrimary)
+                    LocationActionButton(SFSymbols: "location.fill", color: Color.brandPrimary)
                 }
                 
                 
                 Link(destination: URL(string: location.websiteURL)!) {
-                    LocationActionButton(sfSymbole: "network", color: Color.brandPrimary)
+                    LocationActionButton(SFSymbols: "network", color: Color.brandPrimary)
+                }
+                
+                Button {
+                    vm.callLocation()
+                } label: {
+                    LocationActionButton(SFSymbols: "phone.fill", color: Color.brandPrimary)
                 }
                 
                 Button {
                     
                 } label: {
-                    LocationActionButton(sfSymbole: "phone.fill", color: Color.brandPrimary)
-                }
-                
-                Button {
-                    
-                } label: {
-                    LocationActionButton(sfSymbole: "person.fill.xmark", color: Color(uiColor: UIColor.systemPink))
+                    LocationActionButton(SFSymbols: "person.fill.xmark", color: Color(uiColor: UIColor.systemPink))
                 }
             }
         }
@@ -82,16 +88,15 @@ struct LocationButtonsHStack: View {
 
 
 struct LocationActionButton: View {
-    var sfSymbole: String
+    var SFSymbols: String
     var color: Color
-    
     
     var body: some View {
         ZStack{
             Circle()
                 .foregroundColor(color)
                 .frame(width: 60, height: 60)
-            Image(systemName: sfSymbole)
+            Image(systemName: SFSymbols)
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(.white)

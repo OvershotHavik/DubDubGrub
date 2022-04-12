@@ -60,4 +60,9 @@ struct AlertContext{
     static let updateProfileFailure = AlertItem(title: Text("Profile Update Failed"),
                                                 message: Text("We were unable to update your profile at this time.\nPlease try again later."),
                                                 dismissButton: .default(Text("OK")))
+    
+    // MARK: - Location Detail view Errors
+    static let invalidPhoneNumber = AlertItem(title: Text("Invalid Phone Number"),
+                                                message: Text("The phone number for the location is invalid. Please look up the phone number from the website provided."),
+                                                dismissButton: .default(Text("OK")))
 }
