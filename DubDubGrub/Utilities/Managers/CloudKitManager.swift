@@ -76,6 +76,18 @@ final class CloudKitManager {
     }
     
     
+    func save(record: CKRecord, completed: @escaping (Result<CKRecord, Error>) -> Void){
+        CKContainer.default().publicCloudDatabase.save(record) { record, error in
+            guard let record = record, error == nil else {
+                print(error!.localizedDescription)
+                completed(.failure(error!))
+                return
+            }
+            completed(.success(record))
+        }
+    }
+    
+    
     func fetchRecord(with id: CKRecord.ID, completed: @escaping (Result<CKRecord, Error>) -> Void){
         
         CKContainer.default().publicCloudDatabase.fetch(withRecordID: id) { record, error in

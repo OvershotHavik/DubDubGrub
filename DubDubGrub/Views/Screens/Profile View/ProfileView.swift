@@ -53,9 +53,9 @@ struct ProfileView: View {
                 Spacer()
                 
                 Button{
-                    vm.createProfile()
+                    vm.profileContext == .create ? vm.createProfile() : vm.updateProfile()
                 } label: {
-                    DDGButton(title: "Create Profile")
+                    DDGButton(title:  vm.profileContext == .create ? "Create Profile": "Update Profile")
                 }
                 .padding(.bottom)
             }
