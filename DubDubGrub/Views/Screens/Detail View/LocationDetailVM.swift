@@ -19,7 +19,8 @@ final class LocationDetailVM: ObservableObject{
     @Published var column = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @Published var alertItem : AlertItem?
     @Published var isShowingProfileModal = false
-
+    @Published var checkedInProfiles: [DDGProfile] = []
+    @Published var isCheckedIn = false
     init(location: DDGLocation){
         self.location = location
     }
@@ -67,17 +68,42 @@ final class LocationDetailVM: ObservableObject{
                     record[DDGProfile.kIsCheckedIn] = nil
                 }
                 // Save the updated profile to CloudKit
-                CloudKitManager.shared.save(record: record) { result in
-                    switch result{
-                    case .success(_):
-                        //update our checkedInProfile array
-                        print("Checked in/out successfully")
-                    case .failure(_):
-                        print("Error saving record")
+                CloudKitManager.shared.save(record: record) {[self] result in
+                    DispatchQueue.main.async { [self] in
+                        switch result{
+                        case .success(_):
+                            let profile = DDGProfile(record: record)
+                            switch checkInStatus {
+                            case .checkedIn:
+                                checkedInProfiles.append(profile)
+                            case .checkedOut:
+                                checkedInProfiles.removeAll(where: {$0.id == profile.id})
+                            }
+                            //update our checkedInProfile array
+                            isCheckedIn = checkInStatus == .checkedIn
+                            print("Checked in/out successfully")
+                        case .failure(_):
+                            print("Error saving record")
+                        }
                     }
                 }
             case .failure(_):
                 print("Error fetching record")
+            }
+        }
+    }
+    
+    
+    
+    func getCheckedInProfiles(){
+        CloudKitManager.shared.getCheckedInProfiles(for: location.id) { [self] result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let profiles):
+                    self.checkedInProfiles = profiles
+                case .failure(_):
+                    print("Error fetching checkedIn profiles")
+                }
             }
         }
     }

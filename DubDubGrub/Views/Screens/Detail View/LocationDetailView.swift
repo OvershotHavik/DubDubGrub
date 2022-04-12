@@ -30,8 +30,8 @@ struct LocationDetailView: View {
                 
                 ScrollView{
                     LazyVGrid(columns: vm.column) {
-                        ForEach(0..<10) { item in
-                            FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
+                        ForEach(vm.checkedInProfiles) { profile in
+                            FirstNameAvatarView(profile: profile)
                                 .onTapGesture {
                                     withAnimation(.easeIn){
                                         vm.isShowingProfileModal = true
@@ -54,6 +54,9 @@ struct LocationDetailView: View {
                 .animation(.easeOut)
                 .zIndex(2)
             }
+        }
+        .onAppear{
+            vm.getCheckedInProfiles()
         }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,
@@ -96,8 +99,7 @@ struct LocationButtonsHStack: View {
                 }
                 
                 Button {
-                    vm.updateCheckInStatus(to: .checkedIn)
-//                    vm.updateCheckInStatus(to: .checkedOut)
+                    vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
                 } label: {
                     LocationActionButton(SFSymbols: "person.fill.xmark", color: Color(uiColor: UIColor.systemPink))
                 }
