@@ -36,7 +36,6 @@ struct LocationDetailView: View {
                                     withAnimation(.easeIn){
                                         vm.isShowingProfileModal = true
                                     }
-                                    
                                 }
                         }
                     }
@@ -97,7 +96,8 @@ struct LocationButtonsHStack: View {
                 }
                 
                 Button {
-                    
+                    vm.updateCheckInStatus(to: .checkedIn)
+//                    vm.updateCheckInStatus(to: .checkedOut)
                 } label: {
                     LocationActionButton(SFSymbols: "person.fill.xmark", color: Color(uiColor: UIColor.systemPink))
                 }

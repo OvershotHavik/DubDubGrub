@@ -62,6 +62,7 @@ final class ProfileVM: ObservableObject{
                     alertItem = AlertContext.createProfileSuccess
                     for record in records where record.recordType == RecordType.profile{
                         existingProfileRecord = record
+                        CloudKitManager.shared.profileRecordID = record.recordID
                     }
                     
                 case .failure(_):
