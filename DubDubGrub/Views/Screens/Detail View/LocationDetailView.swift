@@ -27,19 +27,32 @@ struct LocationDetailView: View {
                 Text("Who's Here?")
                     .bold()
                     .font(.title2)
-                
-                ScrollView{
-                    LazyVGrid(columns: vm.column) {
-                        ForEach(vm.checkedInProfiles) { profile in
-                            FirstNameAvatarView(profile: profile)
-                                .onTapGesture {
-                                    withAnimation(.easeIn){
-                                        vm.isShowingProfileModal = true
-                                    }
+                ZStack{
+                    if vm.checkedInProfiles.isEmpty{
+                        Text("Nobody's Here 😔")
+                            .bold()
+                            .font(.title2)
+                            .foregroundColor(.secondary)
+                            .padding(.top, 30)
+                    } else {
+                        ScrollView{
+                            LazyVGrid(columns: vm.column) {
+                                ForEach(vm.checkedInProfiles) { profile in
+                                    FirstNameAvatarView(profile: profile)
+                                        .onTapGesture {
+                                            withAnimation(.easeIn){
+                                                vm.isShowingProfileModal = true
+                                            }
+                                        }
                                 }
+                            }
                         }
                     }
+                    if vm.isLoading{
+                        LoadingView()
+                    }
                 }
+                
                 Spacer()
             }
             if vm.isShowingProfileModal{
@@ -57,6 +70,7 @@ struct LocationDetailView: View {
         }
         .onAppear{
             vm.getCheckedInProfiles()
+            vm.getCheckedInStatus()
         }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,
@@ -73,7 +87,7 @@ struct LocationDetailView: View {
 
 struct LocationButtonsHStack: View {
     var location: DDGLocation
-    var vm: LocationDetailVM
+    @ObservedObject var vm: LocationDetailVM
     
     var body: some View {
         ZStack{
@@ -86,23 +100,27 @@ struct LocationButtonsHStack: View {
                 } label: {
                     LocationActionButton(SFSymbols: "location.fill", color: Color.brandPrimary)
                 }
-                
-                
+
+
                 Link(destination: URL(string: location.websiteURL)!) {
                     LocationActionButton(SFSymbols: "network", color: Color.brandPrimary)
                 }
-                
+
                 Button {
                     vm.callLocation()
                 } label: {
                     LocationActionButton(SFSymbols: "phone.fill", color: Color.brandPrimary)
                 }
-                
-                Button {
-                    vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
-                } label: {
-                    LocationActionButton(SFSymbols: "person.fill.xmark", color: Color(uiColor: UIColor.systemPink))
+
+                if CloudKitManager.shared.profileRecordID != nil{
+                    Button {
+                        vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
+                    } label: {
+                        LocationActionButton(SFSymbols: vm.isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark",
+                                             color: vm.isCheckedIn ? .grubRed : .brandPrimary)
+                    }
                 }
+
             }
         }
     }
