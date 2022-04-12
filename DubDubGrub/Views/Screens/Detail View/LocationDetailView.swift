@@ -11,30 +11,50 @@ struct LocationDetailView: View {
     @ObservedObject var vm : LocationDetailVM
 
     var body: some View {
-        VStack(spacing: 16){
-            BannerImageView(image: vm.location.createBannerImage())
+        ZStack{
             
-            HStack{
-                AddressView(address: vm.location.address)
-                Spacer()
-            }
-            DescriptionView(description: vm.location.description)
-                        
-            LocationButtonsHStack(location: vm.location, vm: vm)
-            
-            Text("Who's Here?")
-                .bold()
-                .font(.title2)
-            
-            ScrollView{
-                LazyVGrid(columns: vm.column) {
-                    ForEach(0..<10) { item in
-                        FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
+            VStack(spacing: 16){
+                BannerImageView(image: vm.location.createBannerImage())
+                
+                HStack{
+                    AddressView(address: vm.location.address)
+                    Spacer()
+                }
+                DescriptionView(description: vm.location.description)
+                            
+                LocationButtonsHStack(location: vm.location, vm: vm)
+                
+                Text("Who's Here?")
+                    .bold()
+                    .font(.title2)
+                
+                ScrollView{
+                    LazyVGrid(columns: vm.column) {
+                        ForEach(0..<10) { item in
+                            FirstNameAvatarView(firstName: "Steve", image: PlaceholderImage.avatar)
+                                .onTapGesture {
+                                    withAnimation(.easeIn){
+                                        vm.isShowingProfileModal = true
+                                    }
+                                    
+                                }
+                        }
                     }
                 }
+                Spacer()
             }
-            
-            Spacer()
+            if vm.isShowingProfileModal{
+                Color(.systemBackground)
+                    .ignoresSafeArea()
+                    .opacity(0.9)
+                    .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
+                    .zIndex(1)
+                ProfileModalView(profile: DDGProfile(record: MockData.profile),
+                                 isShowingProfileModal: $vm.isShowingProfileModal)
+                .transition(.opacity.combined(with: .slide))
+                .animation(.easeOut)
+                .zIndex(2)
+            }
         }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,

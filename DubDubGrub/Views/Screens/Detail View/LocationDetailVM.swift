@@ -13,6 +13,7 @@ final class LocationDetailVM: ObservableObject{
     @Published var location: DDGLocation
     @Published var column = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @Published var alertItem : AlertItem?
+    @Published var isShowingProfileModal = false
 
     init(location: DDGLocation){
         self.location = location

@@ -35,7 +35,7 @@ struct DDGProfile{
     
     
     func createAvatarImage() -> UIImage{
-        guard let avatar = avatar else {return PlaceholderImage.square}
+        guard let avatar = avatar else {return PlaceholderImage.avatar}
         return avatar.convertToUIImage(in: .square)
     }
 }
