@@ -56,6 +56,34 @@ final class CloudKitManager {
     }
     
     
+    func getCheckedInProfileDictionary(completed: @escaping (Result<[CKRecord.ID: [DDGProfile]], Error>) -> Void){
+        let predicate = NSPredicate(format: "isCheckedInNilCheck == 1")
+        let query = CKQuery(recordType: RecordType.profile, predicate: predicate)
+        let operation = CKQueryOperation(query: query)
+//        operation.desiredKeys = [DDGProfile.kIsCheckedIn, DDGProfile.kAvatar] // optional to only download specific fields
+        
+        var checkedInProfiles: [CKRecord.ID: [DDGProfile]] = [:]
+        operation.recordFetchedBlock = { record in
+            //build our dictionary
+            let profile = DDGProfile(record: record)
+            guard let locationReference = profile.isCheckedIn else {return}
+            
+            checkedInProfiles[locationReference.recordID, default: []].append(profile) // if the key doesn't exist, create a default blank array
+        }
+        
+        operation.queryCompletionBlock = { cursor, error in
+            guard error == nil else {
+                completed(.failure(error!))
+                return
+            }
+            
+            completed(.success(checkedInProfiles))
+        }
+        
+        CKContainer.default().publicCloudDatabase.add(operation)
+    }
+    
+    
     func getLocations(completed: @escaping (Result<[DDGLocation], Error>) -> Void){
         let sortDescriptor = NSSortDescriptor(key: DDGLocation.kName, ascending: true)
         let query = CKQuery(recordType: RecordType.location, predicate: NSPredicate(value: true))
