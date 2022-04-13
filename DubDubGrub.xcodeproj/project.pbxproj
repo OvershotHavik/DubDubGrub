@@ -43,6 +43,8 @@
 		B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65E27FCD94D00301E3A /* DDBButton.swift */; };
 		B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA66327FF78A200301E3A /* DDGLocation.swift */; };
 		B3F27921280746F500B35885 /* LocationListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F27920280746F500B35885 /* LocationListVM.swift */; };
+		B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2792328075EED00B35885 /* MapBalloon.swift */; };
+		B3F279262807625D00B35885 /* DDGAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F279252807625D00B35885 /* DDGAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +86,8 @@
 		B3DEA65E27FCD94D00301E3A /* DDBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDBButton.swift; sourceTree = "<group>"; };
 		B3DEA66327FF78A200301E3A /* DDGLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGLocation.swift; sourceTree = "<group>"; };
 		B3F27920280746F500B35885 /* LocationListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListVM.swift; sourceTree = "<group>"; };
+		B3F2792328075EED00B35885 /* MapBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBalloon.swift; sourceTree = "<group>"; };
+		B3F279252807625D00B35885 /* DDGAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +302,7 @@
 		B3DEA66127FCDB0B00301E3A /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3F2792228075EC400B35885 /* Map Annotation */,
 				B32D5A7F2804901700AF241E /* UIKit Components */,
 				B3DEA65727FCD6C300301E3A /* Custom Modifiers */,
 				B3DEA65D27FCD93D00301E3A /* Buttons */,
@@ -316,6 +321,15 @@
 				B3AEC10E27FF7FA2002AD6CE /* MockData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B3F2792228075EC400B35885 /* Map Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				B3F2792328075EED00B35885 /* MapBalloon.swift */,
+				B3F279252807625D00B35885 /* DDGAnnotation.swift */,
+			);
+			path = "Map Annotation";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +415,7 @@
 				B32D5A8C2805F07700AF241E /* ProfileModalView.swift in Sources */,
 				B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */,
 				B3AEC11A28009B9B002AD6CE /* AlertItem.swift in Sources */,
+				B3F279262807625D00B35885 /* DDGAnnotation.swift in Sources */,
 				B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */,
 				B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */,
 				B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */,
@@ -412,6 +427,7 @@
 				B32897C627FB62BA007CFBF6 /* LocationListView.swift in Sources */,
 				B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */,
 				B32D5A7C2800C49400AF241E /* OnboardingView.swift in Sources */,
+				B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */,
 				B32D5A812804903E00AF241E /* PhotoPicker.swift in Sources */,
 				B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */,
 				B32D5A872804C74100AF241E /* LoadingView.swift in Sources */,
