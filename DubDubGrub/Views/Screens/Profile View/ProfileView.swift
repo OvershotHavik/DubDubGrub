@@ -41,7 +41,23 @@ struct ProfileView: View {
                     
                 }
                 VStack(alignment: .leading, spacing: 8){
-                    CharactersRemainView(currentCount: vm.bio.count)
+                    HStack{
+                        CharactersRemainView(currentCount: vm.bio.count)
+                        Spacer()
+                        if vm.isCheckedIn{
+                            Button {
+                                vm.checkOut()
+                            } label: {
+                                Label("Check Out", systemImage: "mappin.and.ellipse")
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(.white)
+                                    .padding(10)
+                                    .frame(height: 28)
+                                    .background(Color.grubRed)
+                                    .cornerRadius(8)
+                            }
+                        }
+                    }
                     
                     TextEditor(text: $vm.bio)
                         .frame(height: 100)
@@ -74,6 +90,7 @@ struct ProfileView: View {
         })
         .onAppear{
             vm.getProfile()
+            vm.getCheckedInStatus()
         }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,
