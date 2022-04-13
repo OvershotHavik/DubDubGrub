@@ -45,6 +45,7 @@
 		B3F27921280746F500B35885 /* LocationListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F27920280746F500B35885 /* LocationListVM.swift */; };
 		B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2792328075EED00B35885 /* MapBalloon.swift */; };
 		B3F279262807625D00B35885 /* DDGAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F279252807625D00B35885 /* DDGAnnotation.swift */; };
+		B3F279292807664C00B35885 /* AppTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F279282807664C00B35885 /* AppTabVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		B3F27920280746F500B35885 /* LocationListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListVM.swift; sourceTree = "<group>"; };
 		B3F2792328075EED00B35885 /* MapBalloon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBalloon.swift; sourceTree = "<group>"; };
 		B3F279252807625D00B35885 /* DDGAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGAnnotation.swift; sourceTree = "<group>"; };
+		B3F279282807664C00B35885 /* AppTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,8 +291,8 @@
 		B3DEA66027FCDAC700301E3A /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B3F279272807662C00B35885 /* App Tab View */,
 				B32D5A782800C46000AF241E /* Onboarding */,
-				B32897C127FB6262007CFBF6 /* AppTabView.swift */,
 				B32D5A6E28009E5000AF241E /* Map View */,
 				B32D5A6F28009E6000AF241E /* List View */,
 				B32D5A7028009E6C00AF241E /* Profile View */,
@@ -330,6 +332,15 @@
 				B3F279252807625D00B35885 /* DDGAnnotation.swift */,
 			);
 			path = "Map Annotation";
+			sourceTree = "<group>";
+		};
+		B3F279272807662C00B35885 /* App Tab View */ = {
+			isa = PBXGroup;
+			children = (
+				B3F279282807664C00B35885 /* AppTabVM.swift */,
+				B32897C127FB6262007CFBF6 /* AppTabView.swift */,
+			);
+			path = "App Tab View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -430,6 +441,7 @@
 				B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */,
 				B32D5A812804903E00AF241E /* PhotoPicker.swift in Sources */,
 				B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */,
+				B3F279292807664C00B35885 /* AppTabVM.swift in Sources */,
 				B32D5A872804C74100AF241E /* LoadingView.swift in Sources */,
 				B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */,
 				B32897C227FB6262007CFBF6 /* AppTabView.swift in Sources */,

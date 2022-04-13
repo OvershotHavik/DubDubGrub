@@ -17,7 +17,17 @@ struct LocationMapView: View {
             Map(coordinateRegion: $vm.region,
                 showsUserLocation: true,
                 annotationItems: lm.locations) { location in
-                MapMarker(coordinate: location.location.coordinate, tint: .brandPrimary)
+                MapAnnotation(coordinate: location.location.coordinate,
+                              anchorPoint: CGPoint(x: 0.5, y: 0.75)) {
+                    DDGAnnotation(location: location)
+                        .onTapGesture {
+                            lm.selectedLocation = location
+                            if let _ = lm.selectedLocation {
+                                vm.isShowingDetailView = true
+                            }
+                            
+                        }
+                }
             }
                 .accentColor(.grubRed)
                 .ignoresSafeArea()
@@ -29,11 +39,17 @@ struct LocationMapView: View {
                 Spacer()
             }
         }
-        .sheet(isPresented: $vm.isShowingOnboardView, onDismiss: vm.checkIfLocationServicesIsEnabled) {
-            OnboardingView(isShowingOnboardView: $vm.isShowingOnboardView)
-        }
+        .sheet(isPresented: $vm.isShowingDetailView, content: {
+            NavigationView{
+                LocationDetailView(vm: LocationDetailVM(location: lm.selectedLocation!))
+                    .toolbar {
+                        Button("Dismiss", action: {vm.isShowingDetailView = false})
+                            .foregroundColor(.brandPrimary)
+                    }
+            }
+            
+        })
         .onAppear{
-            vm.runStartupChecks()
             if lm.locations.isEmpty{
                 vm.getLocations(for: lm)
             }
