@@ -42,6 +42,7 @@
 		B3DEA65C27FCD77C00301E3A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65B27FCD77C00301E3A /* View+Ext.swift */; };
 		B3DEA65F27FCD94D00301E3A /* DDBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65E27FCD94D00301E3A /* DDBButton.swift */; };
 		B3DEA66427FF78A200301E3A /* DDGLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA66327FF78A200301E3A /* DDGLocation.swift */; };
+		B3F27921280746F500B35885 /* LocationListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F27920280746F500B35885 /* LocationListVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		B3DEA65B27FCD77C00301E3A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		B3DEA65E27FCD94D00301E3A /* DDBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDBButton.swift; sourceTree = "<group>"; };
 		B3DEA66327FF78A200301E3A /* DDGLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGLocation.swift; sourceTree = "<group>"; };
+		B3F27920280746F500B35885 /* LocationListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		B32D5A6F28009E6000AF241E /* List View */ = {
 			isa = PBXGroup;
 			children = (
+				B3F27920280746F500B35885 /* LocationListVM.swift */,
 				B32897C527FB62BA007CFBF6 /* LocationListView.swift */,
 			);
 			path = "List View";
@@ -402,6 +405,7 @@
 				B32897C427FB629F007CFBF6 /* LocationMapView.swift in Sources */,
 				B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */,
 				B3DEA65427FCD5DF00301E3A /* AvatarView.swift in Sources */,
+				B3F27921280746F500B35885 /* LocationListVM.swift in Sources */,
 				B32D5A772800AF1A00AF241E /* CKAsset+Ext.swift in Sources */,
 				B32D5A852804A84400AF241E /* UIImage+Ext.swift in Sources */,
 				B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */,
