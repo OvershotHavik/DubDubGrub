@@ -117,6 +117,7 @@ struct LocationButtonsHStack: View {
                 if CloudKitManager.shared.profileRecordID != nil{
                     Button {
                         vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
+                        playHaptic()
                     } label: {
                         LocationActionButton(SFSymbols: vm.isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark",
                                              color: vm.isCheckedIn ? .grubRed : .brandPrimary)

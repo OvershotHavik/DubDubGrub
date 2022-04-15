@@ -9,6 +9,7 @@ import SwiftUI
 
 
 extension View{
+    
     func profileNameStyle() -> some View{
         self.modifier(ProfileNameText())
     }
@@ -16,5 +17,11 @@ extension View{
     
     func dismissKeyboard(){
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    
+    func playHaptic(){
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }
