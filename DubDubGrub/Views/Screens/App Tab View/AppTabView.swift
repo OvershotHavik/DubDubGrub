@@ -27,7 +27,7 @@ struct AppTabView: View {
             vm.runStartupChecks()
         }
         .sheet(isPresented: $vm.isShowingOnboardView, onDismiss: vm.checkIfLocationServicesIsEnabled) {
-            OnboardingView(isShowingOnboardView: $vm.isShowingOnboardView)
+            OnboardingView()
         }
         .accentColor(.brandPrimary)
     }

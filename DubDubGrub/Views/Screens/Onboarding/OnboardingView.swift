@@ -9,20 +9,22 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @Binding var isShowingOnboardView: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack{
             HStack{
                 Spacer()
                 Button {
-                    isShowingOnboardView = false
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     XDismissButton()
                         .padding()
                 }
             }
+            
             Spacer()
+            
             LogoView(frameWidth: 250)
                 .padding(.bottom)
             VStack(alignment: .leading, spacing: 32){
@@ -44,13 +46,9 @@ struct OnboardingView: View {
     }
 }
 
-struct OnboardingView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingView(isShowingOnboardView: .constant(true))
-    }
-}
 
-struct OnboardInfoView: View {
+fileprivate struct OnboardInfoView: View {
+    
     var sfSymbol: String
     var title: String
     var description: String

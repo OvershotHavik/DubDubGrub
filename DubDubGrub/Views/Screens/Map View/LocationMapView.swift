@@ -16,7 +16,7 @@ struct LocationMapView: View {
 
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Map(coordinateRegion: $vm.region,
                 showsUserLocation: true,
                 annotationItems: lm.locations) { location in
@@ -24,7 +24,6 @@ struct LocationMapView: View {
                               anchorPoint: CGPoint(x: 0.5, y: 0.75)) {
                     DDGAnnotation(location: location,
                                   number: vm.checkedInProfiles[location.id, default: 0])
-                    .accessibilityLabel(Text(vm.createVoiceOverSummary(for: location)))
                         .onTapGesture {
                             lm.selectedLocation = location
                             if let _ = lm.selectedLocation {
@@ -36,17 +35,13 @@ struct LocationMapView: View {
                 .accentColor(.grubRed)
                 .ignoresSafeArea()
             
-            VStack{
-                LogoView(frameWidth: 125)
-                    .shadow(radius: 10)
-//                    .accessibilityHidden(true)
-                Spacer()
-            }
+            LogoView(frameWidth: 125)
+                .shadow(radius: 10)
+
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{
                 vm.createLocationDetailView(for: lm.selectedLocation!, in: sizeCategory)
-//                LocationDetailView(vm: LocationDetailVM(location: lm.selectedLocation!))
                     .toolbar {
                         Button("Dismiss", action: {vm.isShowingDetailView = false})
                             .foregroundColor(.brandPrimary)
@@ -59,10 +54,6 @@ struct LocationMapView: View {
             }
             vm.getCheckedInCounts()
         }
-        .alert(item: $vm.alertItem, content: { alertItem in
-            Alert(title: alertItem.title,
-                  message: alertItem.message,
-                  dismissButton: alertItem.dismissButton)
-        })
+        .alert(item: $vm.alertItem, content: {$0.alert})
     }
 }
