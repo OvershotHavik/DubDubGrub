@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationDetailView: View {
     
     @ObservedObject var vm : LocationDetailVM
-
+    
     var body: some View {
         ZStack{
             
@@ -24,7 +24,7 @@ struct LocationDetailView: View {
                 .padding(.horizontal)
                 DescriptionView(description: vm.location.description)
                     .padding(.horizontal)
-                            
+                
                 LocationButtonsHStack(location: vm.location, vm: vm)
                     .padding(.horizontal)
                 
@@ -103,17 +103,17 @@ struct LocationButtonsHStack: View {
                 } label: {
                     LocationActionButton(SFSymbols: "location.fill", color: Color.brandPrimary)
                 }
-
+                
                 Link(destination: URL(string: location.websiteURL)!) {
                     LocationActionButton(SFSymbols: "network", color: Color.brandPrimary)
                 }
-
+                
                 Button {
                     vm.callLocation()
                 } label: {
                     LocationActionButton(SFSymbols: "phone.fill", color: Color.brandPrimary)
                 }
-
+                
                 if CloudKitManager.shared.profileRecordID != nil{
                     Button {
                         vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
