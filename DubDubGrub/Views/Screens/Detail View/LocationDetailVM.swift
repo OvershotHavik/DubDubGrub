@@ -16,7 +16,6 @@ enum CheckInStatus {
 final class LocationDetailVM: ObservableObject{
     
     @Published var location: DDGLocation
-    @Published var column = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @Published var alertItem : AlertItem?
     @Published var isShowingProfileModal = false
     @Published var checkedInProfiles: [DDGProfile] = []
@@ -32,6 +31,11 @@ final class LocationDetailVM: ObservableObject{
         self.location = location
     }
     
+    
+    func determineColumns(for sizeCategory: ContentSizeCategory) -> [GridItem]{
+        let numberOfColumns = sizeCategory >= .accessibilityMedium ? 1 : 3
+        return Array(repeating: GridItem(.flexible()), count: numberOfColumns)
+    }
     
     func getDirectionsToLocation() {
         let placeMark = MKPlacemark(coordinate: location.location.coordinate)

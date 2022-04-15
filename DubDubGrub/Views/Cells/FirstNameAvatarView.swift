@@ -10,10 +10,12 @@ import SwiftUI
 struct FirstNameAvatarView: View {
     
     var profile: DDGProfile
+    @Environment(\.sizeCategory) var sizeCategory
     
     var body: some View {
         VStack{
-            AvatarView(image: profile.createAvatarImage(), size: 64)
+            AvatarView(image: profile.createAvatarImage(),
+                       size: sizeCategory >= .accessibilityMedium ? 100 : 64)
             Text(profile.firstName)
                 .fontWeight(.bold)
                 .minimumScaleFactor(0.75)

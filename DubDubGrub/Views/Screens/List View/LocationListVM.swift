@@ -5,7 +5,7 @@
 //  Created by Steve Plavetzky on 4/13/22.
 //
 
-import Foundation
+import SwiftUI
 import CloudKit
 
 
@@ -33,5 +33,15 @@ final class LocationListVM: ObservableObject{
         let personPlurality = count == 1 ? "person" : "people"
         
         return "\(location.name) \(count) \(personPlurality) checked in."
+    }
+    
+    
+    @ViewBuilder func createLocationDetailView(for location: DDGLocation, in sizeCategory: ContentSizeCategory) -> some View{
+        if sizeCategory >= .accessibilityMedium {
+            LocationDetailView(vm: LocationDetailVM(location: location))
+                .embedInScrollView()
+        } else {
+            LocationDetailView(vm: LocationDetailVM(location: location))
+        }
     }
 }

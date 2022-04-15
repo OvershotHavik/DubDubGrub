@@ -7,6 +7,7 @@
 
 import MapKit
 import CloudKit
+import SwiftUI
 
 final class LocationMapVM: ObservableObject{
     
@@ -52,5 +53,15 @@ final class LocationMapVM: ObservableObject{
         let personPlurality = count == 1 ? "person" : "people"
         
         return "Map Pin \(location.name) \(count) \(personPlurality) checked in."
+    }
+    
+    
+    @ViewBuilder func createLocationDetailView(for location: DDGLocation, in sizeCategory: ContentSizeCategory) -> some View{
+        if sizeCategory >= .accessibilityMedium {
+            LocationDetailView(vm: LocationDetailVM(location: location))
+                .embedInScrollView()
+        } else {
+            LocationDetailView(vm: LocationDetailVM(location: location))
+        }
     }
 }

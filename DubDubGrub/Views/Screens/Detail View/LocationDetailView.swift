@@ -10,7 +10,8 @@ import SwiftUI
 struct LocationDetailView: View {
     
     @ObservedObject var vm : LocationDetailVM
-    
+    @Environment(\.sizeCategory) var sizeCategory
+
     var body: some View {
         ZStack{
             
@@ -44,7 +45,7 @@ struct LocationDetailView: View {
                             .padding(.top, 30)
                     } else {
                         ScrollView{
-                            LazyVGrid(columns: vm.column) {
+                            LazyVGrid(columns: vm.determineColumns(for: sizeCategory)) {
                                 ForEach(vm.checkedInProfiles) { profile in
                                     FirstNameAvatarView(profile: profile)
                                         .accessibilityElement(children: .ignore)
@@ -68,7 +69,7 @@ struct LocationDetailView: View {
             }
             .accessibilityHidden(vm.isShowingProfileModal)
             if vm.isShowingProfileModal{
-                Color(.systemBackground)
+                Color(.black)
                     .ignoresSafeArea()
                     .opacity(0.9)
                     .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
@@ -94,6 +95,21 @@ struct LocationDetailView: View {
         .padding(.horizontal)
         .navigationTitle(vm.location.name)
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+
+struct LocationDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView{
+            LocationDetailView(vm: LocationDetailVM(location: DDGLocation(record: MockData.chipotle)))
+        }
+        .environment(\.sizeCategory, .extraExtraExtraLarge)
+        NavigationView{
+            LocationDetailView(vm: LocationDetailVM(location: DDGLocation(record: MockData.chipotle)))
+        }
+        .preferredColorScheme(.dark)
+        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
     }
 }
 
@@ -200,9 +216,8 @@ struct DescriptionView: View {
     
     var body: some View {
         Text(description)
-            .lineLimit(3)
             .minimumScaleFactor(0.75)
             .multilineTextAlignment(.leading)
-            .frame(height: 70)
+            .fixedSize(horizontal: false, vertical: true)
     }
 }

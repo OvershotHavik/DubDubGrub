@@ -12,6 +12,8 @@ struct LocationMapView: View {
     
     @StateObject private var vm = LocationMapVM()
     @EnvironmentObject private var lm: LocationManager
+    @Environment(\.sizeCategory) var sizeCategory
+
     
     var body: some View {
         ZStack {
@@ -43,7 +45,8 @@ struct LocationMapView: View {
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{
-                LocationDetailView(vm: LocationDetailVM(location: lm.selectedLocation!))
+                vm.createLocationDetailView(for: lm.selectedLocation!, in: sizeCategory)
+//                LocationDetailView(vm: LocationDetailVM(location: lm.selectedLocation!))
                     .toolbar {
                         Button("Dismiss", action: {vm.isShowingDetailView = false})
                             .foregroundColor(.brandPrimary)
