@@ -22,6 +22,7 @@ struct LocationMapView: View {
                               anchorPoint: CGPoint(x: 0.5, y: 0.75)) {
                     DDGAnnotation(location: location,
                                   number: vm.checkedInProfiles[location.id, default: 0])
+                    .accessibilityLabel(Text(vm.createVoiceOverSummary(for: location)))
                         .onTapGesture {
                             lm.selectedLocation = location
                             if let _ = lm.selectedLocation {
@@ -36,7 +37,7 @@ struct LocationMapView: View {
             VStack{
                 LogoView(frameWidth: 125)
                     .shadow(radius: 10)
-
+//                    .accessibilityHidden(true)
                 Spacer()
             }
         }

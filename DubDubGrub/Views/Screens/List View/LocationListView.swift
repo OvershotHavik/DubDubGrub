@@ -19,7 +19,10 @@ struct LocationListView: View {
                     NavigationLink(destination: LocationDetailView(vm: LocationDetailVM(location: location))) {
                         LocationListCell(location: location,
                                          profiles: vm.checkedInProfiles[location.id, default: []])
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(Text(vm.createVoiceOverSummary(for: location)))
                     }
+                    
                 }
             }
             .onAppear{

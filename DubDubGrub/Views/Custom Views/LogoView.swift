@@ -12,7 +12,7 @@ struct LogoView: View {
     var frameWidth: CGFloat
     
     var body: some View {
-        Image("ddg-map-logo")
+        Image(decorative: "ddg-map-logo") // the voice over would not read off this name when using decorative
             .resizable()
             .scaledToFit()
             .frame(width: frameWidth)

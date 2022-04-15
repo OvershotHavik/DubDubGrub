@@ -22,6 +22,11 @@ final class LocationDetailVM: ObservableObject{
     @Published var checkedInProfiles: [DDGProfile] = []
     @Published var isCheckedIn = false
     @Published var isLoading = false
+    var selectedProfile: DDGProfile? {
+        didSet{
+            isShowingProfileModal = true
+        }
+    }
     
     init(location: DDGLocation){
         self.location = location

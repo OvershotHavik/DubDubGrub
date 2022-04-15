@@ -31,6 +31,10 @@ struct LocationDetailView: View {
                 Text("Who's Here?")
                     .bold()
                     .font(.title2)
+                    .accessibilityAddTraits(.isHeader)
+                    .accessibilityLabel(Text("Who's Here? \(vm.checkedInProfiles.count) checked in"))
+                    .accessibilityHint(Text("Bottom section is scrollable."))
+                
                 ZStack{
                     if vm.checkedInProfiles.isEmpty{
                         Text("Nobody's Here 😔")
@@ -43,9 +47,13 @@ struct LocationDetailView: View {
                             LazyVGrid(columns: vm.column) {
                                 ForEach(vm.checkedInProfiles) { profile in
                                     FirstNameAvatarView(profile: profile)
+                                        .accessibilityElement(children: .ignore)
+                                        .accessibilityAddTraits(.isButton)
+                                        .accessibilityHint(Text("Shows \(profile.firstName)'s profile pop up."))
+                                        .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
                                         .onTapGesture {
                                             withAnimation(.easeIn){
-                                                vm.isShowingProfileModal = true
+                                                vm.selectedProfile = profile
                                             }
                                         }
                                 }
@@ -58,14 +66,17 @@ struct LocationDetailView: View {
                 }
                 Spacer()
             }
+            .accessibilityHidden(vm.isShowingProfileModal)
             if vm.isShowingProfileModal{
                 Color(.systemBackground)
                     .ignoresSafeArea()
                     .opacity(0.9)
                     .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
                     .zIndex(1)
-                ProfileModalView(profile: DDGProfile(record: MockData.profile),
+                    .accessibilityHidden(true)
+                ProfileModalView(profile: vm.selectedProfile ?? DDGProfile(record: MockData.profile),
                                  isShowingProfileModal: $vm.isShowingProfileModal)
+//                .accessibilityAddTraits(.isModal)
                 .transition(.opacity.combined(with: .slide))
                 .animation(.easeOut)
                 .zIndex(2)
@@ -103,16 +114,23 @@ struct LocationButtonsHStack: View {
                 } label: {
                     LocationActionButton(SFSymbols: "location.fill", color: Color.brandPrimary)
                 }
+                .accessibilityLabel(Text("Get directions."))
+
                 
                 Link(destination: URL(string: location.websiteURL)!) {
                     LocationActionButton(SFSymbols: "network", color: Color.brandPrimary)
                 }
+                .accessibilityRemoveTraits(.isButton)
+                .accessibilityLabel(Text("Go to website.."))
+
                 
                 Button {
                     vm.callLocation()
                 } label: {
                     LocationActionButton(SFSymbols: "phone.fill", color: Color.brandPrimary)
                 }
+                .accessibilityLabel(Text("Call location."))
+
                 
                 if CloudKitManager.shared.profileRecordID != nil{
                     Button {
@@ -121,6 +139,7 @@ struct LocationButtonsHStack: View {
                     } label: {
                         LocationActionButton(SFSymbols: vm.isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark",
                                              color: vm.isCheckedIn ? .grubRed : .brandPrimary)
+                        .accessibilityLabel(Text(vm.isCheckedIn ? "Check out of location." : "Check into location."))
                     }
                 }
             }
@@ -158,6 +177,7 @@ struct BannerImageView: View {
             .resizable()
             .scaledToFill()
             .frame(height: 120)
+            .accessibilityHidden(true)
     }
 }
 

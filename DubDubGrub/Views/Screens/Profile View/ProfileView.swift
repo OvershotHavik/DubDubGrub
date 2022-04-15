@@ -22,6 +22,10 @@ struct ProfileView: View {
                             AvatarView(image: vm.avatar, size: 84)
                             EditImageView()
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityAddTraits(.isButton)
+                        .accessibilityLabel(Text("Profile Photo"))
+                        .accessibilityHint(Text("Opens the iPhone's photo picker."))
                         .padding(.leading, 12)
                         .onTapGesture {
                             vm.isShowingPhotoPicker = true
@@ -42,6 +46,8 @@ struct ProfileView: View {
                 VStack(alignment: .leading, spacing: 8){
                     HStack{
                         CharactersRemainView(currentCount: vm.bio.count)
+                            .accessibilityAddTraits(.isHeader)
+                        
                         Spacer()
                         if vm.isCheckedIn{
                             Button {
@@ -56,12 +62,15 @@ struct ProfileView: View {
                                     .background(Color.grubRed)
                                     .cornerRadius(8)
                             }
+                            .accessibilityLabel(Text("Check out of current location."))
                         }
                     }
                     TextEditor(text: $vm.bio)
                         .frame(height: 100)
                         .overlay(RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.secondary, lineWidth: 1))
+                        .accessibilityLabel(Text("Bio, \(vm.bio)"))
+                        .accessibilityHint(Text("This TextField is for your bio and has a 100 character maximum."))
                 }
                 .padding(.horizontal, 16)
                 
