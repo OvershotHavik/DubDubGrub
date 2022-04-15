@@ -19,7 +19,8 @@ struct LocationMapView: View {
                 annotationItems: lm.locations) { location in
                 MapAnnotation(coordinate: location.location.coordinate,
                               anchorPoint: CGPoint(x: 0.5, y: 0.75)) {
-                    DDGAnnotation(location: location)
+                    DDGAnnotation(location: location,
+                                  number: vm.checkedInProfiles[location.id, default: 0])
                         .onTapGesture {
                             lm.selectedLocation = location
                             if let _ = lm.selectedLocation {
@@ -39,7 +40,7 @@ struct LocationMapView: View {
                 Spacer()
             }
         }
-        .sheet(isPresented: $vm.isShowingDetailView, content: {
+        .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{
                 LocationDetailView(vm: LocationDetailVM(location: lm.selectedLocation!))
                     .toolbar {
@@ -53,6 +54,7 @@ struct LocationMapView: View {
             if lm.locations.isEmpty{
                 vm.getLocations(for: lm)
             }
+            vm.getCheckedInCounts()
         }
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,

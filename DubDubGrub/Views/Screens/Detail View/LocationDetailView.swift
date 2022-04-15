@@ -20,9 +20,12 @@ struct LocationDetailView: View {
                     AddressView(address: vm.location.address)
                     Spacer()
                 }
+                .padding(.horizontal)
                 DescriptionView(description: vm.location.description)
+                    .padding(.horizontal)
                             
                 LocationButtonsHStack(location: vm.location, vm: vm)
+                    .padding(.horizontal)
                 
                 Text("Who's Here?")
                     .bold()
