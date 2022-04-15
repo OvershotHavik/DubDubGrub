@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct DDGAnnotation: View {
+    
     var location: DDGLocation
     var number: Int
+    
     var body: some View {
         VStack{
             ZStack{
@@ -38,6 +40,7 @@ struct DDGAnnotation: View {
         }
     }
 }
+
 
 struct DDGAnnotation_Previews: PreviewProvider {
     static var previews: some View {

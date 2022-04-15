@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ProfileModalView: View {
+    
     var profile: DDGProfile
     @Binding var isShowingProfileModal: Bool
+    
     var body: some View {
         ZStack{
             VStack{
@@ -51,6 +53,7 @@ struct ProfileModalView: View {
         }
     }
 }
+
 
 struct ProfileModalView_Previews: PreviewProvider {
     static var previews: some View {

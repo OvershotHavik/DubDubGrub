@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LocationListView: View {
+    
     @EnvironmentObject private var lm: LocationManager
     @StateObject private var vm = LocationListVM()
     
@@ -28,6 +29,7 @@ struct LocationListView: View {
         }
     }
 }
+
 
 struct LocationListView_Previews: PreviewProvider {
     static var previews: some View {

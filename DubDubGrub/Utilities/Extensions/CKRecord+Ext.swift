@@ -12,6 +12,7 @@ extension CKRecord {
         return DDGLocation(record: self)
     }
     
+    
     func convertToDDGProfile() -> DDGProfile {
         return DDGProfile(record: self)
     }

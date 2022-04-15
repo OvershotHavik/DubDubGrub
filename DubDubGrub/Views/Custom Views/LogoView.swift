@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LogoView: View {
+    
     var frameWidth: CGFloat
     
     var body: some View {
@@ -17,6 +18,7 @@ struct LogoView: View {
             .frame(width: frameWidth)
     }
 }
+
 
 struct LogoView_Previews: PreviewProvider {
     static var previews: some View {

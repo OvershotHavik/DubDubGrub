@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LocationDetailView: View {
+    
     @ObservedObject var vm : LocationDetailVM
 
     var body: some View {
@@ -55,7 +56,6 @@ struct LocationDetailView: View {
                         LoadingView()
                     }
                 }
-                
                 Spacer()
             }
             if vm.isShowingProfileModal{
@@ -83,12 +83,12 @@ struct LocationDetailView: View {
         .padding(.horizontal)
         .navigationTitle(vm.location.name)
         .navigationBarTitleDisplayMode(.inline)
-
     }
 }
 
 
 struct LocationButtonsHStack: View {
+    
     var location: DDGLocation
     @ObservedObject var vm: LocationDetailVM
     
@@ -103,7 +103,6 @@ struct LocationButtonsHStack: View {
                 } label: {
                     LocationActionButton(SFSymbols: "location.fill", color: Color.brandPrimary)
                 }
-
 
                 Link(destination: URL(string: location.websiteURL)!) {
                     LocationActionButton(SFSymbols: "network", color: Color.brandPrimary)
@@ -123,7 +122,6 @@ struct LocationButtonsHStack: View {
                                              color: vm.isCheckedIn ? .grubRed : .brandPrimary)
                     }
                 }
-
             }
         }
     }
@@ -131,6 +129,7 @@ struct LocationButtonsHStack: View {
 
 
 struct LocationActionButton: View {
+    
     var SFSymbols: String
     var color: Color
     

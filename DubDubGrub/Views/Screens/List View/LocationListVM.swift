@@ -10,6 +10,7 @@ import CloudKit
 
 
 final class LocationListVM: ObservableObject{
+    
     @Published var checkedInProfiles: [CKRecord.ID: [DDGProfile]] = [:]
     
     func getCheckedInProfilesDictionary(){

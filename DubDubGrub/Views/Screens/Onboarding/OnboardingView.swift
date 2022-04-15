@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingView: View {
+    
     @Binding var isShowingOnboardView: Bool
     
     var body: some View {

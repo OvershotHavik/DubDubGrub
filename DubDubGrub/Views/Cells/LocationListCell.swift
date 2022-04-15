@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LocationListCell: View {
+    
     var location: DDGLocation
     var profiles: [DDGProfile]
     

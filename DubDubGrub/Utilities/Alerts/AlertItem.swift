@@ -14,6 +14,7 @@ struct AlertItem: Identifiable{
     let dismissButton: Alert.Button
 }
 
+
 struct AlertContext{
     // MARK: - Map View Errors
     static let unableToGetLocations = AlertItem(title: Text("Locations Error"),

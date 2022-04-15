@@ -8,6 +8,7 @@
 import CoreLocation
 
 final class AppTabVM: NSObject, ObservableObject{
+    
     @Published var isShowingOnboardView = false
     @Published var alertItem: AlertItem?
     
@@ -17,6 +18,8 @@ final class AppTabVM: NSObject, ObservableObject{
     var hasSeenOnboardView: Bool {
         return UserDefaults.standard.bool(forKey: kHasSeenOnboardView) // will return false if not set
     }
+    
+    
     func runStartupChecks(){
         if !hasSeenOnboardView {
             isShowingOnboardView = true

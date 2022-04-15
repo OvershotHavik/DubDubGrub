@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AvatarView: View {
+    
     var image: UIImage
     var size: CGFloat
     
@@ -19,6 +20,7 @@ struct AvatarView: View {
             .frame(width: size, height: size)
     }
 }
+
 
 struct AvatarView_Previews: PreviewProvider {
     static var previews: some View {

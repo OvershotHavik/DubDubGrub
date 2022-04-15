@@ -61,16 +61,14 @@ final class CloudKitManager {
         let query = CKQuery(recordType: RecordType.profile, predicate: predicate)
         let operation = CKQueryOperation(query: query)
 //        operation.desiredKeys = [DDGProfile.kIsCheckedIn, DDGProfile.kAvatar] // optional to only download specific fields
-        
         var checkedInProfiles: [CKRecord.ID: [DDGProfile]] = [:]
+        
         operation.recordFetchedBlock = { record in
             //build our dictionary
             let profile = DDGProfile(record: record)
             guard let locationReference = profile.isCheckedIn else {return}
-            
             checkedInProfiles[locationReference.recordID, default: []].append(profile) // if the key doesn't exist, create a default blank array
         }
-        
         operation.queryCompletionBlock = { cursor, error in
             guard error == nil else {
                 completed(.failure(error!))
@@ -78,7 +76,6 @@ final class CloudKitManager {
             }
             completed(.success(checkedInProfiles))
         }
-        
         CKContainer.default().publicCloudDatabase.add(operation)
     }
     
@@ -93,7 +90,6 @@ final class CloudKitManager {
         operation.recordFetchedBlock = { record in
             //build our dictionary
             guard let locationReference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference else {return}
-            
             if let count = checkedInProfiles[locationReference.recordID]{
                 checkedInProfiles[locationReference.recordID] = count + 1
             } else {
@@ -123,26 +119,20 @@ final class CloudKitManager {
                 completed(.failure(error!))
                 return
             }
-            
             guard let records = records else { return }
-            
 //            var locations: [DDGLocation] = []
 //
 //            for record in records{
 //                let location = DDGLocation(record: record)
 //                locations.append(location)
 //            }
-            
             let locations = records.map({$0.convertToDDGLocation()})
             completed(.success(locations))
         }
     }
     
     
-    
-    
     func batchSave(records: [CKRecord], completed: @escaping (Result<[CKRecord], Error>) -> Void){
-        
         let operation = CKModifyRecordsOperation(recordsToSave: records)
         operation.modifyRecordsCompletionBlock = { savedRecords, _, error in
             guard let savedRecords = savedRecords, error == nil else {
@@ -169,7 +159,6 @@ final class CloudKitManager {
     
     
     func fetchRecord(with id: CKRecord.ID, completed: @escaping (Result<CKRecord, Error>) -> Void){
-        
         CKContainer.default().publicCloudDatabase.fetch(withRecordID: id) { record, error in
             guard let record = record, error == nil else {
                 print(error!.localizedDescription)

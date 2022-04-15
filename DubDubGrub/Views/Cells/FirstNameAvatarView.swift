@@ -10,7 +10,6 @@ import SwiftUI
 struct FirstNameAvatarView: View {
     
     var profile: DDGProfile
-//    var avatar: UIImage = UIImage(named: "default-avatar")!
     
     var body: some View {
         VStack{
@@ -23,6 +22,7 @@ struct FirstNameAvatarView: View {
         .padding()
     }
 }
+
 
 struct FirstNameAvatarView_Previews: PreviewProvider {
     static var previews: some View {

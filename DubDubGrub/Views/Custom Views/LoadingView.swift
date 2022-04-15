@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct LoadingView: View {
-    
-    
+struct LoadingView: View {    
     var body: some View {
         ZStack{
             Color(.systemBackground)
@@ -23,6 +21,7 @@ struct LoadingView: View {
         }
     }
 }
+
 
 struct LoadingView_Previews: PreviewProvider {
     static var previews: some View {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
     @StateObject private var vm = ProfileVM()
     
     var body: some View {
@@ -26,7 +27,6 @@ struct ProfileView: View {
                             vm.isShowingPhotoPicker = true
                         }
                         
-                        
                         VStack(spacing: 1){
                             TextField("First Name", text: $vm.firstName)
                                 .profileNameStyle()
@@ -38,7 +38,6 @@ struct ProfileView: View {
                         .padding(.trailing, 16)
                     }
                     .padding()
-                    
                 }
                 VStack(alignment: .leading, spacing: 8){
                     HStack{
@@ -58,7 +57,6 @@ struct ProfileView: View {
                             }
                         }
                     }
-                    
                     TextEditor(text: $vm.bio)
                         .frame(height: 100)
                         .overlay(RoundedRectangle(cornerRadius: 8)
@@ -78,7 +76,6 @@ struct ProfileView: View {
             if vm.isLoading{
                 LoadingView()
             }
-            
         }
         .navigationTitle("Profile")
         .toolbar(content: {
@@ -136,7 +133,6 @@ struct EditImageView: View {
 
 
 struct CharactersRemainView: View{
-    
     var currentCount: Int
     
     var body: some View{

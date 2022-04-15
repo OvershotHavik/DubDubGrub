@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DDGButton: View {
+    
     var title: String
     
     var body: some View {
@@ -19,6 +20,7 @@ struct DDGButton: View {
             .cornerRadius(8)
     }
 }
+
 
 struct DDBButton_Previews: PreviewProvider {
     static var previews: some View {

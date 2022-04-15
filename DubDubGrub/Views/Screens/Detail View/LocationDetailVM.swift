@@ -32,7 +32,6 @@ final class LocationDetailVM: ObservableObject{
         let placeMark = MKPlacemark(coordinate: location.location.coordinate)
         let mapItem = MKMapItem(placemark: placeMark)
         mapItem.name = location.name
-        
         mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking])
     }
     

@@ -9,6 +9,7 @@ import SwiftUI
 import MapKit
 
 struct LocationMapView: View {
+    
     @StateObject private var vm = LocationMapVM()
     @EnvironmentObject private var lm: LocationManager
     
@@ -26,7 +27,6 @@ struct LocationMapView: View {
                             if let _ = lm.selectedLocation {
                                 vm.isShowingDetailView = true
                             }
-                            
                         }
                 }
             }
@@ -48,7 +48,6 @@ struct LocationMapView: View {
                             .foregroundColor(.brandPrimary)
                     }
             }
-            
         })
         .onAppear{
             if lm.locations.isEmpty{

@@ -12,6 +12,7 @@ enum ProfileContext {
 }
 
 final class ProfileVM: ObservableObject{
+    
     @Published var firstName = ""
     @Published var lastName = ""
     @Published var companyName = ""
@@ -29,14 +30,14 @@ final class ProfileVM: ObservableObject{
     }
     var profileContext: ProfileContext = .create
     
-    func isValidProfile() -> Bool{
+    
+    private func isValidProfile() -> Bool{
         guard !firstName.isEmpty,
               !lastName.isEmpty,
               !companyName.isEmpty,
               !bio.isEmpty,
               avatar != PlaceholderImage.avatar,
               bio.count <= 100 else {return false}
-        
         return true
     }
     
@@ -133,8 +134,8 @@ final class ProfileVM: ObservableObject{
         }
         
         guard let profileReference = userRecord["userProfile"] as? CKRecord.Reference else { return }
-        
         let profileRecordID = profileReference.recordID
+        
         showLoadingView()
         CloudKitManager.shared.fetchRecord(with: profileRecordID) { result in
             DispatchQueue.main.async {[self] in
