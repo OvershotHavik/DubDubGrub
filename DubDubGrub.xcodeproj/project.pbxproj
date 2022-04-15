@@ -46,6 +46,7 @@
 		B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2792328075EED00B35885 /* MapBalloon.swift */; };
 		B3F279262807625D00B35885 /* DDGAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F279252807625D00B35885 /* DDGAnnotation.swift */; };
 		B3F279292807664C00B35885 /* AppTabVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F279282807664C00B35885 /* AppTabVM.swift */; };
+		B3F2792C280A0B7A00B35885 /* ProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2792B280A0B7A00B35885 /* ProfileSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		B3F279252807625D00B35885 /* DDGAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDGAnnotation.swift; sourceTree = "<group>"; };
 		B3F279282807664C00B35885 /* AppTabVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabVM.swift; sourceTree = "<group>"; };
 		B3F2792A2809C02A00B35885 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B3F2792B280A0B7A00B35885 /* ProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				B32D5A8B2805F07700AF241E /* ProfileModalView.swift */,
+				B3F2792B280A0B7A00B35885 /* ProfileSheetView.swift */,
 			);
 			path = "Profile View";
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				B32D5A812804903E00AF241E /* PhotoPicker.swift in Sources */,
 				B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */,
 				B3F279292807664C00B35885 /* AppTabVM.swift in Sources */,
+				B3F2792C280A0B7A00B35885 /* ProfileSheetView.swift in Sources */,
 				B32D5A872804C74100AF241E /* LoadingView.swift in Sources */,
 				B3AEC10D27FF7D6F002AD6CE /* DDGProfile.swift in Sources */,
 				B32897C227FB6262007CFBF6 /* AppTabView.swift in Sources */,

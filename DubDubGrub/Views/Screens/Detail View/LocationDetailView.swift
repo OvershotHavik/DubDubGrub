@@ -54,7 +54,7 @@ struct LocationDetailView: View {
                                         .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
                                         .onTapGesture {
                                             withAnimation(.easeIn){
-                                                vm.selectedProfile = profile
+                                                vm.show(profile: profile, in: sizeCategory)
                                             }
                                         }
                                 }
@@ -87,6 +87,16 @@ struct LocationDetailView: View {
             vm.getCheckedInProfiles()
             vm.getCheckedInStatus()
         }
+        .sheet(isPresented: $vm.isShowingProfileSheet, content: {
+            NavigationView{
+                ProfileSheetView(profile: vm.selectedProfile!)
+            }
+            .toolbar {
+                Button("Dismiss", action: {vm.isShowingProfileSheet = false})
+                    .foregroundColor(.brandPrimary)
+            }
+            
+        })
         .alert(item: $vm.alertItem, content: { alertItem in
             Alert(title: alertItem.title,
                   message: alertItem.message,
