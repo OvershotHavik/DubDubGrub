@@ -16,7 +16,7 @@ struct LocationDetailView: View {
         ZStack{
             
             VStack(spacing: 16){
-                BannerImageView(image: vm.location.createBannerImage())
+                BannerImageView(image: vm.location.bannerImage)
                 
                 HStack{
                     AddressView(address: vm.location.address)

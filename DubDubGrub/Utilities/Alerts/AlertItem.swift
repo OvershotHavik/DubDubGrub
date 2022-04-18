@@ -72,6 +72,11 @@ struct AlertContext{
                                                 message: Text("We were unable to update your profile at this time.\nPlease try again later."),
                                                 dismissButton: .default(Text("OK")))
     
+    // MARK: - Location List View
+    static let unableToGetAllCheckedInProfiles = AlertItem(title: Text("Server Error"),
+                                                message: Text("We are unable to get users checked into all locations at this time.\nPlease try again later."),
+                                                dismissButton: .default(Text("OK")))
+    
     // MARK: - Location Detail view Errors
     static let invalidPhoneNumber = AlertItem(title: Text("Invalid Phone Number"),
                                                 message: Text("The phone number for the location is invalid. Please look up the phone number from the website provided."),
@@ -86,6 +91,8 @@ struct AlertContext{
                                                 dismissButton: .default(Text("OK")))
     
     static let unableToGetCheckedInProfiles = AlertItem(title: Text("Server Error"),
-                                                message: Text("We are unable to get users checked into this lcoation at this time.\nPlease try again later."),
+                                                message: Text("We are unable to get users checked into this location at this time.\nPlease try again later."),
                                                 dismissButton: .default(Text("OK")))
+    
+
 }
