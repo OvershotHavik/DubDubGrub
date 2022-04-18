@@ -15,15 +15,15 @@ struct AppTabView: View {
         TabView{
             LocationMapView()
                 .tabItem {Label("Map", systemImage: "map")}
-            LocationListView()
+            LocationListView(vm: LocationListView.LocationListVM())
                 .tabItem {Label("Locations", systemImage: "building")}
             NavigationView{
-                ProfileView()
+                ProfileView(vm: ProfileView.ProfileVM())
             }
             .tabItem {Label("Profile", systemImage: "person")}
         }
-        .onAppear{
-            CloudKitManager.shared.getUserRecord()
+        .task{
+            try? await CloudKitManager.shared.getUserRecord()
             vm.checkIfHasSeenOnboard()
         }
         .sheet(isPresented: $vm.isShowingOnboardView) {

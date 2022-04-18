@@ -13,7 +13,7 @@ enum CheckInStatus {
     case checkedIn, checkedOut
 }
 
-final class LocationDetailVM: ObservableObject{
+@MainActor final class LocationDetailVM: ObservableObject{
     
     @Published var location: DDGLocation
     @Published var alertItem : AlertItem?
@@ -70,11 +70,10 @@ final class LocationDetailVM: ObservableObject{
     func getCheckedInStatus(){
         guard let profileRecordID = CloudKitManager.shared.profileRecordID else {return}
         
-        CloudKitManager.shared.fetchRecord(with: profileRecordID) {[self] result in
-            DispatchQueue.main.async { [self] in
-                switch result{
-                case .success(let record):
-                    if let reference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
+        Task {
+            do {
+                let record = try await CloudKitManager.shared.fetchRecord(with: profileRecordID)
+                if let reference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference {
 //                        if reference.recordID == location.id {
 //                            isCheckedIn = true
 //                            print("is checked in = true")
@@ -82,14 +81,13 @@ final class LocationDetailVM: ObservableObject{
 //                            isCheckedIn = false
 //                            print("is checked in = false")
 //                        }
-                        isCheckedIn = reference.recordID == location.id
-                    } else {
-                        isCheckedIn = false
-                        print("is checked in = false - reference is nil, not checked in anywhere")
-                    }
-                case .failure(_):
-                    alertItem = AlertContext.unableToGetCheckedInStatus
+                    isCheckedIn = reference.recordID == location.id
+                } else {
+                    isCheckedIn = false
+                    print("is checked in = false - reference is nil, not checked in anywhere")
                 }
+            }catch {
+                alertItem = AlertContext.unableToGetCheckedInStatus
             }
         }
     }
@@ -103,10 +101,10 @@ final class LocationDetailVM: ObservableObject{
         }
         
         showLoadingView()
-        CloudKitManager.shared.fetchRecord(with: profileRecordID) {[self] result in
-            switch result{
-            case .success(let record):
-                // Create a reference to the location
+        
+        Task {
+            do {
+                let record = try await CloudKitManager.shared.fetchRecord(with: profileRecordID)
                 switch checkInStatus {
                 case .checkedIn:
                     record[DDGProfile.kIsCheckedIn] = CKRecord.Reference(recordID: location.id, action: .none)
@@ -115,33 +113,22 @@ final class LocationDetailVM: ObservableObject{
                     record[DDGProfile.kIsCheckedIn] = nil
                     record[DDGProfile.kIsCheckedInNilCheck] = nil
                 }
-                // Save the updated profile to CloudKit
-                CloudKitManager.shared.save(record: record) {[self] result in
-                    DispatchQueue.main.async { [self] in
-                        hideLoadingView()
-                        switch result{
-                        case .success(let record):
-                            HapticManager.playSuccess()
-                            let profile = DDGProfile(record: record)
-                            switch checkInStatus {
-                            case .checkedIn:
-                                checkedInProfiles.append(profile)
-                            case .checkedOut:
-                                checkedInProfiles.removeAll(where: {$0.id == profile.id})
-                            }
-                            //update our checkedInProfile array
-                            isCheckedIn.toggle()
-                            print("Checked in/out successfully")
-                        case .failure(_):
-                            alertItem = AlertContext.unableToCheckInOrOut
-                        }
-                    }
+                let savedRecord = try await CloudKitManager.shared.save(record: record)
+                HapticManager.playSuccess()
+                let profile = DDGProfile(record: savedRecord)
+                switch checkInStatus {
+                case .checkedIn:
+                    checkedInProfiles.append(profile)
+                case .checkedOut:
+                    checkedInProfiles.removeAll(where: {$0.id == profile.id})
                 }
-            case .failure(_):
-                DispatchQueue.main.async {[self] in
-                    hideLoadingView()
-                    alertItem = AlertContext.unableToCheckInOrOut
-                }
+                //update our checkedInProfile array
+                isCheckedIn.toggle()
+                hideLoadingView()
+                print("Checked in/out successfully")
+            }catch {
+                hideLoadingView()
+                alertItem = AlertContext.unableToCheckInOrOut
             }
         }
     }
@@ -149,14 +136,12 @@ final class LocationDetailVM: ObservableObject{
     
     func getCheckedInProfiles(){
         showLoadingView()
-        CloudKitManager.shared.getCheckedInProfiles(for: location.id) { [self] result in
-            DispatchQueue.main.async { [self] in
-                switch result{
-                case .success(let profiles):
-                    checkedInProfiles = profiles
-                case .failure(_):
-                    alertItem = AlertContext.unableToGetCheckedInProfiles
-                }
+        Task {
+            do {
+                checkedInProfiles = try await CloudKitManager.shared.getCheckedInProfiles(for: location.id)
+                hideLoadingView()
+            } catch {
+                alertItem = AlertContext.unableToGetCheckedInProfiles
                 hideLoadingView()
             }
         }

@@ -9,12 +9,43 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject private var vm = ProfileVM()
+    @StateObject var vm : ProfileVM
+    @FocusState private var focusedTextField: ProfileTextField?
     
+    enum ProfileTextField {
+        case firstName, lastName, companyName, bio
+    }
     var body: some View {
         ZStack {
             VStack{
-                ProfileHStack(vm: vm)
+                HStack(spacing: 16){
+                    ProfileImageView(avatar: vm.avatar)
+                        .onTapGesture {
+                            vm.isShowingPhotoPicker = true
+                        }
+                    
+                    VStack(spacing: 1){
+                        TextField("First Name", text: $vm.firstName)
+                            .profileNameStyle()
+                            .focused($focusedTextField, equals: .firstName)
+                            .onSubmit {focusedTextField = .lastName}
+                            .submitLabel(.next)
+                        TextField("Last Name", text: $vm.lastName)
+                            .profileNameStyle()
+                            .focused($focusedTextField, equals: .lastName)
+                            .onSubmit {focusedTextField = .companyName}
+                            .submitLabel(.next)
+                        TextField("Company Name", text: $vm.companyName)
+                            .focused($focusedTextField, equals: .companyName)
+                            .onSubmit {focusedTextField = .bio}
+                            .submitLabel(.next)
+                    }
+                    .padding(.trailing, 16)
+                }
+                .padding(.vertical)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(12)
+                .padding(.horizontal)
                 
                 VStack(alignment: .leading, spacing: 8){
                     HStack{
@@ -31,6 +62,7 @@ struct ProfileView: View {
                         }
                     }
                     BioTextEditor(text: $vm.bio)
+                        .focused($focusedTextField, equals: .bio)
                 }
                 .padding(.horizontal, 16)
                 
@@ -44,20 +76,19 @@ struct ProfileView: View {
                 .disabled(vm.isLoading)
                 .padding(.bottom)
             }
+            .toolbar{
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button("Dismiss") {focusedTextField = nil}
+                }
+            }
             if vm.isLoading{
                 LoadingView()
             }
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(DeviceTypes.isiPhone8Standard ? .inline : .automatic)
-        .toolbar(content: {
-            Button {
-                dismissKeyboard()
-            } label: {
-                Image(systemName: "keyboard.chevron.compact.down")
-            }
-        })
-        .onAppear{
+        .ignoresSafeArea(.keyboard)
+        .task{
             vm.getProfile()
             vm.getCheckedInStatus()
         }
@@ -77,35 +108,6 @@ struct ProfileView: View {
 //    }
 //}
 
-
-fileprivate struct ProfileHStack: View{
-    
-    @ObservedObject var vm: ProfileView.ProfileVM
-    
-    var body: some View{
-        HStack(spacing: 16){
-            ProfileImageView(avatar: vm.avatar)
-                .onTapGesture {
-                    vm.isShowingPhotoPicker = true
-                }
-            
-            VStack(spacing: 1){
-                TextField("First Name", text: $vm.firstName)
-                    .profileNameStyle()
-                TextField("Last Name", text: $vm.lastName)
-                    .profileNameStyle()
-                TextField("Company Name", text: $vm.companyName)
-                
-            }
-            .padding(.trailing, 16)
-        }
-        .padding(.vertical)
-        .background(Color(.secondarySystemBackground))
-        .cornerRadius(12)
-        .padding(.horizontal)
-    }
-
-}
 
 
 fileprivate struct NameBackgroundView: View {

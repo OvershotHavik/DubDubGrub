@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationListView: View {
     
     @EnvironmentObject private var lm: LocationManager
-    @StateObject private var vm = LocationListVM()
+    @StateObject var vm : LocationListVM
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @State private var onAppearHasFired = false
     
@@ -26,23 +26,19 @@ struct LocationListView: View {
                     }
                 }
             }
-            .onAppear{
+            .task{
                 if !onAppearHasFired{
                     print("👀 on appeared called")
-                    vm.getCheckedInProfilesDictionary()
+                    await vm.getCheckedInProfilesDictionary()
                     onAppearHasFired = true
                 }
+            }
+            .refreshable {
+                await vm.getCheckedInProfilesDictionary()
             }
             .alert(item: $vm.alertItem, content: {$0.alert})
             .navigationTitle("Grub Spots")
             .listStyle(.plain)
         }
-    }
-}
-
-
-struct LocationListView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationListView()
     }
 }

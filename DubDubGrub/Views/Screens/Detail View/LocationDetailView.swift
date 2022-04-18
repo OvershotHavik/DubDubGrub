@@ -35,7 +35,7 @@ struct LocationDetailView: View {
                                  isShowingProfileModal: $vm.isShowingProfileModal)
             }
         }
-        .onAppear{
+        .task{
             vm.getCheckedInProfiles()
             vm.getCheckedInStatus()
         }

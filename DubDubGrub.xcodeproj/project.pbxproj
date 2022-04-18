@@ -129,6 +129,7 @@
 				B3AEC110280094F2002AD6CE /* Utilities */,
 				B3DEA66227FF788D00301E3A /* Model */,
 				B3DEA65227FCD5CC00301E3A /* Views */,
+				B32D5A8A2805F04100AF241E /* Profile View */,
 				B32897BB27FB5F71007CFBF6 /* DubDubGrub.entitlements */,
 				B32897AD27FB4D5C007CFBF6 /* DubDubGrubApp.swift */,
 				B32897B127FB4D62007CFBF6 /* Assets.xcassets */,
@@ -183,7 +184,6 @@
 		B32D5A752800A85B00AF241E /* Detail View */ = {
 			isa = PBXGroup;
 			children = (
-				B32D5A8A2805F04100AF241E /* Profile View */,
 				B32D5A882805CF8600AF241E /* LocationDetailVM.swift */,
 				B3DEA64E27FB724000301E3A /* LocationDetailView.swift */,
 			);

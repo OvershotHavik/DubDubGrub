@@ -46,7 +46,7 @@ struct LocationMapView: View {
                     }
             }
         })
-        .onAppear{
+        .task{
             if lm.locations.isEmpty{
                 vm.getLocations(for: lm)
             }
