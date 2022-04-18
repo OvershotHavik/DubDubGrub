@@ -28,7 +28,7 @@ struct LocationDetailView: View {
                 
                 LocationButtonsHStack(location: vm.location, vm: vm)
                     .padding(.horizontal)
-                
+
                 Text("Who's Here?")
                     .bold()
                     .font(.title2)
@@ -54,7 +54,7 @@ struct LocationDetailView: View {
                                         .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
                                         .onTapGesture {
                                             withAnimation(.easeIn){
-                                                vm.show(profile: profile, in: sizeCategory)
+                                                vm.show(profile, in: sizeCategory)
                                             }
                                         }
                                 }
@@ -65,7 +65,6 @@ struct LocationDetailView: View {
                         LoadingView()
                     }
                 }
-                Spacer()
             }
             .accessibilityHidden(vm.isShowingProfileModal)
             if vm.isShowingProfileModal{
@@ -97,11 +96,7 @@ struct LocationDetailView: View {
             }
             
         })
-        .alert(item: $vm.alertItem, content: { alertItem in
-            Alert(title: alertItem.title,
-                  message: alertItem.message,
-                  dismissButton: alertItem.dismissButton)
-        })
+        .alert(item: $vm.alertItem, content: { $0.alert })
         .padding(.horizontal)
         .navigationTitle(vm.location.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -124,7 +119,7 @@ struct LocationDetailView_Previews: PreviewProvider {
 }
 
 
-struct LocationButtonsHStack: View {
+fileprivate struct LocationButtonsHStack: View {
     
     var location: DDGLocation
     @ObservedObject var vm: LocationDetailVM
@@ -161,12 +156,12 @@ struct LocationButtonsHStack: View {
                 if CloudKitManager.shared.profileRecordID != nil{
                     Button {
                         vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
-                        playHaptic()
                     } label: {
                         LocationActionButton(SFSymbols: vm.isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark",
                                              color: vm.isCheckedIn ? .grubRed : .brandPrimary)
                         .accessibilityLabel(Text(vm.isCheckedIn ? "Check out of location." : "Check into location."))
                     }
+                    .disabled(vm.isLoading)
                 }
             }
         }
@@ -174,7 +169,7 @@ struct LocationButtonsHStack: View {
 }
 
 
-struct LocationActionButton: View {
+fileprivate struct LocationActionButton: View {
     
     var SFSymbols: String
     var color: Color
@@ -194,7 +189,7 @@ struct LocationActionButton: View {
 }
 
 
-struct BannerImageView: View {
+fileprivate struct BannerImageView: View {
     
     var image: UIImage
     
@@ -208,7 +203,7 @@ struct BannerImageView: View {
 }
 
 
-struct AddressView: View {
+fileprivate struct AddressView: View {
     
     var address: String
     
@@ -220,7 +215,7 @@ struct AddressView: View {
 }
 
 
-struct DescriptionView: View {
+fileprivate struct DescriptionView: View {
     
     var description: String
     
