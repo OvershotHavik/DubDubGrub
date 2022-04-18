@@ -23,6 +23,15 @@ final class LocationDetailVM: ObservableObject{
     @Published var isCheckedIn = false
     @Published var isLoading = false
     var selectedProfile: DDGProfile?
+    var buttonCOlor: Color{
+        isCheckedIn ? .grubRed : .brandPrimary
+    }
+    var buttonImageTitle: String{
+        isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark"
+    }
+    var buttonA11yLabel: String{
+        isCheckedIn ? "Check out of location." : "Check into location."
+    }
     
     init(location: DDGLocation){
         self.location = location

@@ -36,7 +36,6 @@
 		B3BA2DB8280DBA35005C0384 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA2DB7280DBA35005C0384 /* HapticManager.swift */; };
 		B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64C27FB67D600301E3A /* LocationListCell.swift */; };
 		B3DEA64F27FB724000301E3A /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64E27FB724000301E3A /* LocationDetailView.swift */; };
-		B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */; };
 		B3DEA65427FCD5DF00301E3A /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65327FCD5DF00301E3A /* AvatarView.swift */; };
 		B3DEA65627FCD60300301E3A /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65527FCD60300301E3A /* LogoView.swift */; };
 		B3DEA65927FCD71500301E3A /* ProfileNameText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA65827FCD71500301E3A /* ProfileNameText.swift */; };
@@ -82,7 +81,6 @@
 		B3BA2DB7280DBA35005C0384 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B3DEA64C27FB67D600301E3A /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
 		B3DEA64E27FB724000301E3A /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
-		B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstNameAvatarView.swift; sourceTree = "<group>"; };
 		B3DEA65327FCD5DF00301E3A /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		B3DEA65527FCD60300301E3A /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		B3DEA65827FCD71500301E3A /* ProfileNameText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNameText.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				B3DEA64C27FB67D600301E3A /* LocationListCell.swift */,
-				B3DEA65027FB764700301E3A /* FirstNameAvatarView.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -425,7 +422,6 @@
 				B32D5A892805CF8600AF241E /* LocationDetailVM.swift in Sources */,
 				B32D5A7E2800C86900AF241E /* XDismissButton.swift in Sources */,
 				B3AEC115280095FE002AD6CE /* Constants.swift in Sources */,
-				B3DEA65127FB764700301E3A /* FirstNameAvatarView.swift in Sources */,
 				B3DEA65627FCD60300301E3A /* LogoView.swift in Sources */,
 				B3BA2DB8280DBA35005C0384 /* HapticManager.swift in Sources */,
 				B32D5A7228009E9200AF241E /* LocationMapVM.swift in Sources */,

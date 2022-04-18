@@ -18,68 +18,21 @@ struct LocationDetailView: View {
             VStack(spacing: 16){
                 BannerImageView(image: vm.location.bannerImage)
                 
-                HStack{
-                    AddressView(address: vm.location.address)
-                    Spacer()
-                }
-                .padding(.horizontal)
+                AddressHStack(address: vm.location.address)
+                
                 DescriptionView(description: vm.location.description)
-                    .padding(.horizontal)
                 
                 LocationButtonsHStack(location: vm.location, vm: vm)
-                    .padding(.horizontal)
 
-                Text("Who's Here?")
-                    .bold()
-                    .font(.title2)
-                    .accessibilityAddTraits(.isHeader)
-                    .accessibilityLabel(Text("Who's Here? \(vm.checkedInProfiles.count) checked in"))
-                    .accessibilityHint(Text("Bottom section is scrollable."))
+                GridHeaderTextView(number: vm.checkedInProfiles.count)
                 
-                ZStack{
-                    if vm.checkedInProfiles.isEmpty{
-                        Text("Nobody's Here 😔")
-                            .bold()
-                            .font(.title2)
-                            .foregroundColor(.secondary)
-                            .padding(.top, 30)
-                    } else {
-                        ScrollView{
-                            LazyVGrid(columns: vm.determineColumns(for: sizeCategory)) {
-                                ForEach(vm.checkedInProfiles) { profile in
-                                    FirstNameAvatarView(profile: profile)
-                                        .accessibilityElement(children: .ignore)
-                                        .accessibilityAddTraits(.isButton)
-                                        .accessibilityHint(Text("Shows \(profile.firstName)'s profile pop up."))
-                                        .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
-                                        .onTapGesture {
-                                            withAnimation(.easeIn){
-                                                vm.show(profile, in: sizeCategory)
-                                            }
-                                        }
-                                }
-                            }
-                        }
-                    }
-                    if vm.isLoading{
-                        LoadingView()
-                    }
-                }
+                AvatarGridView(vm: vm)
             }
             .accessibilityHidden(vm.isShowingProfileModal)
             if vm.isShowingProfileModal{
-                Color(.black)
-                    .ignoresSafeArea()
-                    .opacity(0.9)
-                    .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
-                    .zIndex(1)
-                    .accessibilityHidden(true)
+                FullScreenBlackTransparencyView()
                 ProfileModalView(profile: vm.selectedProfile ?? DDGProfile(record: MockData.profile),
                                  isShowingProfileModal: $vm.isShowingProfileModal)
-//                .accessibilityAddTraits(.isModal)
-                .transition(.opacity.combined(with: .slide))
-                .animation(.easeOut)
-                .zIndex(2)
             }
         }
         .onAppear{
@@ -94,7 +47,6 @@ struct LocationDetailView: View {
                 Button("Dismiss", action: {vm.isShowingProfileSheet = false})
                     .foregroundColor(.brandPrimary)
             }
-            
         })
         .alert(item: $vm.alertItem, content: { $0.alert })
         .padding(.horizontal)
@@ -119,16 +71,42 @@ struct LocationDetailView_Previews: PreviewProvider {
 }
 
 
+fileprivate struct BannerImageView: View {
+    
+    var image: UIImage
+    
+    var body: some View {
+        Image(uiImage: image)
+            .resizable()
+            .scaledToFill()
+            .frame(height: 120)
+            .accessibilityHidden(true)
+    }
+}
+
+
+fileprivate struct AddressHStack: View {
+    
+    var address: String
+    
+    var body: some View {
+        HStack{
+            Label(address, systemImage: "mappin.and.ellipse")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+}
+
+
 fileprivate struct LocationButtonsHStack: View {
     
     var location: DDGLocation
     @ObservedObject var vm: LocationDetailVM
     
     var body: some View {
-        ZStack{
-            Capsule()
-                .frame(height: 80)
-                .foregroundColor(Color(uiColor: .secondarySystemBackground))
             HStack(spacing: 20){
                 Button {
                     vm.getDirectionsToLocation()
@@ -152,19 +130,20 @@ fileprivate struct LocationButtonsHStack: View {
                 }
                 .accessibilityLabel(Text("Call location."))
 
-                
                 if CloudKitManager.shared.profileRecordID != nil{
                     Button {
                         vm.updateCheckInStatus(to: vm.isCheckedIn ? .checkedOut : .checkedIn)
                     } label: {
-                        LocationActionButton(SFSymbols: vm.isCheckedIn ? "person.fill.xmark" : "person.fill.checkmark",
-                                             color: vm.isCheckedIn ? .grubRed : .brandPrimary)
-                        .accessibilityLabel(Text(vm.isCheckedIn ? "Check out of location." : "Check into location."))
+                        LocationActionButton(SFSymbols: vm.buttonImageTitle,
+                                             color: vm.buttonCOlor)
                     }
+                    .accessibilityLabel(Text(vm.buttonA11yLabel))
                     .disabled(vm.isLoading)
                 }
             }
-        }
+            .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+            .background(Color(.secondarySystemBackground))
+            .clipShape(Capsule())
     }
 }
 
@@ -189,32 +168,6 @@ fileprivate struct LocationActionButton: View {
 }
 
 
-fileprivate struct BannerImageView: View {
-    
-    var image: UIImage
-    
-    var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .scaledToFill()
-            .frame(height: 120)
-            .accessibilityHidden(true)
-    }
-}
-
-
-fileprivate struct AddressView: View {
-    
-    var address: String
-    
-    var body: some View {
-        Label(address, systemImage: "mappin.and.ellipse")
-            .font(.caption)
-            .foregroundColor(.secondary)
-    }
-}
-
-
 fileprivate struct DescriptionView: View {
     
     var description: String
@@ -224,5 +177,99 @@ fileprivate struct DescriptionView: View {
             .minimumScaleFactor(0.75)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal)
+    }
+}
+
+
+fileprivate struct GridHeaderTextView: View{
+    var number: Int
+    
+    var body: some View{
+        Text("Who's Here?")
+            .bold()
+            .font(.title2)
+            .accessibilityAddTraits(.isHeader)
+            .accessibilityLabel(Text("Who's Here? \(number) checked in"))
+            .accessibilityHint(Text("Bottom section is scrollable."))
+    }
+}
+
+
+fileprivate struct GridEmptyStateTextView: View{
+    
+    var body: some View{
+        Text("Nobody's Here 😔")
+            .bold()
+            .font(.title2)
+            .foregroundColor(.secondary)
+            .padding(.top, 30)
+    }
+}
+
+
+fileprivate struct FirstNameAvatarView: View {
+    
+    var profile: DDGProfile
+    @Environment(\.sizeCategory) var sizeCategory
+    
+    var body: some View {
+        VStack{
+            AvatarView(image: profile.avatarImage,
+                       size: sizeCategory >= .accessibilityMedium ? 100 : 64)
+            Text(profile.firstName)
+                .fontWeight(.bold)
+                .minimumScaleFactor(0.75)
+                .lineLimit(1)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityHint(Text("Shows \(profile.firstName)'s profile pop up."))
+        .accessibilityLabel(Text("\(profile.firstName) \(profile.lastName)"))
+        .padding()
+    }
+}
+
+
+fileprivate struct FullScreenBlackTransparencyView: View{
+    
+    var body: some View{
+        Color(.black)
+            .ignoresSafeArea()
+            .opacity(0.9)
+            .transition(AnyTransition.opacity.animation(.easeOut(duration: 0.35)))
+            .zIndex(1)
+            .accessibilityHidden(true)
+    }
+}
+
+
+fileprivate struct AvatarGridView: View{
+    
+    @ObservedObject var vm: LocationDetailVM
+    @Environment(\.sizeCategory) var sizeCategory
+    
+    var body: some View{
+        ZStack{
+            if vm.checkedInProfiles.isEmpty{
+                GridEmptyStateTextView()
+            } else {
+                ScrollView{
+                    LazyVGrid(columns: vm.determineColumns(for: sizeCategory)) {
+                        ForEach(vm.checkedInProfiles) { profile in
+                            FirstNameAvatarView(profile: profile)
+                                .onTapGesture {
+                                    withAnimation(.easeIn){
+                                        vm.show(profile, in: sizeCategory)
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
+            if vm.isLoading{
+                LoadingView()
+            }
+        }
     }
 }
