@@ -190,7 +190,6 @@ final class CloudKitManager {
 //        operation.resultsLimit = 1
         operation.recordFetchedBlock = { record in
             //build our dictionary
-            let profile = DDGProfile(record: record)
             guard let locationReference = record[DDGProfile.kIsCheckedIn] as? CKRecord.Reference else {return}
             if let count = checkedInProfiles[locationReference.recordID]{
                 checkedInProfiles[locationReference.recordID] = count + 1

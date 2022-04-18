@@ -12,7 +12,7 @@ struct LocationMapView: View {
     
     @StateObject private var vm = LocationMapVM()
     @EnvironmentObject private var lm: LocationManager
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     
     var body: some View {
@@ -41,10 +41,9 @@ struct LocationMapView: View {
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{
-                vm.createLocationDetailView(for: lm.selectedLocation!, in: sizeCategory)
+                vm.createLocationDetailView(for: lm.selectedLocation!, in: dynamicTypeSize)
                     .toolbar {
                         Button("Dismiss", action: {vm.isShowingDetailView = false})
-                            .foregroundColor(.brandPrimary)
                     }
             }
         })

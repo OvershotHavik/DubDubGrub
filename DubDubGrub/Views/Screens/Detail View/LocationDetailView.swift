@@ -10,7 +10,7 @@ import SwiftUI
 struct LocationDetailView: View {
     
     @ObservedObject var vm : LocationDetailVM
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     var body: some View {
         ZStack{
@@ -61,12 +61,12 @@ struct LocationDetailView_Previews: PreviewProvider {
         NavigationView{
             LocationDetailView(vm: LocationDetailVM(location: DDGLocation(record: MockData.chipotle)))
         }
-        .environment(\.sizeCategory, .extraExtraExtraLarge)
+        .environment(\.dynamicTypeSize, .accessibility1)
         NavigationView{
             LocationDetailView(vm: LocationDetailVM(location: DDGLocation(record: MockData.chipotle)))
         }
         .preferredColorScheme(.dark)
-        .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
+        .environment(\.dynamicTypeSize, .accessibility5)
     }
 }
 
@@ -211,12 +211,12 @@ fileprivate struct GridEmptyStateTextView: View{
 fileprivate struct FirstNameAvatarView: View {
     
     var profile: DDGProfile
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     var body: some View {
         VStack{
             AvatarView(image: profile.avatarImage,
-                       size: sizeCategory >= .accessibilityMedium ? 100 : 64)
+                       size: dynamicTypeSize >= .accessibility3 ? 100 : 64)
             Text(profile.firstName)
                 .fontWeight(.bold)
                 .minimumScaleFactor(0.75)
@@ -247,7 +247,7 @@ fileprivate struct FullScreenBlackTransparencyView: View{
 fileprivate struct AvatarGridView: View{
     
     @ObservedObject var vm: LocationDetailVM
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     var body: some View{
         ZStack{
@@ -255,12 +255,12 @@ fileprivate struct AvatarGridView: View{
                 GridEmptyStateTextView()
             } else {
                 ScrollView{
-                    LazyVGrid(columns: vm.determineColumns(for: sizeCategory)) {
+                    LazyVGrid(columns: vm.determineColumns(for: dynamicTypeSize)) {
                         ForEach(vm.checkedInProfiles) { profile in
                             FirstNameAvatarView(profile: profile)
                                 .onTapGesture {
                                     withAnimation(.easeIn){
-                                        vm.show(profile, in: sizeCategory)
+                                        vm.show(profile, in: dynamicTypeSize)
                                     }
                                 }
                         }

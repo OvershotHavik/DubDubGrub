@@ -11,13 +11,14 @@ struct LocationListView: View {
     
     @EnvironmentObject private var lm: LocationManager
     @StateObject private var vm = LocationListVM()
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @State private var onAppearHasFired = false
+    
     var body: some View {
         NavigationView{
             List{
                 ForEach(lm.locations) { location in
-                    NavigationLink(destination: vm.createLocationDetailView(for: location, in: sizeCategory)) {
+                    NavigationLink(destination: vm.createLocationDetailView(for: location, in: dynamicTypeSize)) {
                         LocationListCell(location: location,
                                          profiles: vm.checkedInProfiles[location.id, default: []])
                         .accessibilityElement(children: .ignore)
@@ -34,6 +35,7 @@ struct LocationListView: View {
             }
             .alert(item: $vm.alertItem, content: {$0.alert})
             .navigationTitle("Grub Spots")
+            .listStyle(.plain)
         }
     }
 }

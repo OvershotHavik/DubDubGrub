@@ -9,14 +9,14 @@ import SwiftUI
 
 struct OnboardingView: View {
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack{
             HStack{
                 Spacer()
                 Button {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 } label: {
                     XDismissButton()
                         .padding()
