@@ -44,6 +44,7 @@ extension LocationMapView{
             }
         }
         
+        
         func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
             print("Did fail with Error")
         }

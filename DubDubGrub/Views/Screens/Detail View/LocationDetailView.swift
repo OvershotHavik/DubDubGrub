@@ -199,11 +199,14 @@ fileprivate struct GridHeaderTextView: View{
 fileprivate struct GridEmptyStateTextView: View{
     
     var body: some View{
-        Text("Nobody's Here 😔")
-            .bold()
-            .font(.title2)
-            .foregroundColor(.secondary)
-            .padding(.top, 30)
+        VStack{
+            Text("Nobody's Here 😔")
+                .bold()
+                .font(.title2)
+                .foregroundColor(.secondary)
+                .padding(.top, 30)
+            Spacer()
+        }
     }
 }
 
