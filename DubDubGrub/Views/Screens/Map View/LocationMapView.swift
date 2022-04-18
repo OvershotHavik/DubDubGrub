@@ -4,7 +4,7 @@
 //
 //  Created by Steve Plavetzky on 4/4/22.
 //
-
+import CoreLocationUI
 import SwiftUI
 import MapKit
 
@@ -37,7 +37,6 @@ struct LocationMapView: View {
             
             LogoView(frameWidth: 125)
                 .shadow(radius: 10)
-
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{
@@ -53,6 +52,17 @@ struct LocationMapView: View {
             }
             vm.getCheckedInCounts()
         }
+        .overlay(alignment: .bottomLeading, content: {
+            LocationButton(.currentLocation) {
+                vm.requestAllowOnceLocationPermission()
+            }
+            .foregroundColor(.white)
+            .symbolVariant(.fill)
+            .tint(.grubRed)
+            .labelStyle(.iconOnly)
+            .clipShape(Circle())
+            .padding(EdgeInsets(top: 0, leading: 15, bottom: 40, trailing: 0))
+        })
         .alert(item: $vm.alertItem, content: {$0.alert})
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 
 extension LocationMapView{
     
-    final class LocationMapVM: ObservableObject{
+    final class LocationMapVM: NSObject, ObservableObject, CLLocationManagerDelegate{
         
         @Published var checkedInProfiles: [CKRecord.ID: Int] = [:]
         @Published var isShowingDetailView = false
@@ -21,6 +21,36 @@ extension LocationMapView{
                                                        span: MKCoordinateSpan(latitudeDelta: 0.01,
                                                                               longitudeDelta: 0.01))
 
+        let deviceLocationManager = CLLocationManager()
+        override init(){
+            super.init()
+            deviceLocationManager.delegate = self
+        }
+        
+        
+        func requestAllowOnceLocationPermission(){
+            deviceLocationManager.requestLocation()
+        }
+        
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            guard let currentLocation = locations.last else {
+                //handle error
+                return
+            }
+            withAnimation {
+                DispatchQueue.main.async {
+                    self.region = MKCoordinateRegion(center: currentLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01,
+                                                                                                           longitudeDelta: 0.01))
+                }
+            }
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+            print("Did fail with Error")
+        }
+        
+        
         func getLocations(for locationManager: LocationManager){
             CloudKitManager.shared.getLocations { [self] result in
                 DispatchQueue.main.async {
