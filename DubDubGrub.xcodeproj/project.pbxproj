@@ -31,7 +31,6 @@
 		B3AEC10F27FF7FA2002AD6CE /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC10E27FF7FA2002AD6CE /* MockData.swift */; };
 		B3AEC11328009529002AD6CE /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11228009529002AD6CE /* CloudKitManager.swift */; };
 		B3AEC115280095FE002AD6CE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC114280095FE002AD6CE /* Constants.swift */; };
-		B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */; };
 		B3AEC11A28009B9B002AD6CE /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AEC11928009B9B002AD6CE /* AlertItem.swift */; };
 		B3BA2DB8280DBA35005C0384 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BA2DB7280DBA35005C0384 /* HapticManager.swift */; };
 		B3DEA64D27FB67D600301E3A /* LocationListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEA64C27FB67D600301E3A /* LocationListCell.swift */; };
@@ -76,7 +75,6 @@
 		B3AEC10E27FF7FA2002AD6CE /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		B3AEC11228009529002AD6CE /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		B3AEC114280095FE002AD6CE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKRecord+Ext.swift"; sourceTree = "<group>"; };
 		B3AEC11928009B9B002AD6CE /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		B3BA2DB7280DBA35005C0384 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		B3DEA64C27FB67D600301E3A /* LocationListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListCell.swift; sourceTree = "<group>"; };
@@ -277,7 +275,6 @@
 			children = (
 				B32897BF27FB620C007CFBF6 /* Color+Ext.swift */,
 				B3DEA65B27FCD77C00301E3A /* View+Ext.swift */,
-				B3AEC11628009A9D002AD6CE /* CKRecord+Ext.swift */,
 				B32D5A762800AF1A00AF241E /* CKAsset+Ext.swift */,
 				B32D5A842804A84400AF241E /* UIImage+Ext.swift */,
 			);
@@ -445,7 +442,6 @@
 				B32D5A7C2800C49400AF241E /* OnboardingView.swift in Sources */,
 				B3F2792428075EED00B35885 /* MapBalloon.swift in Sources */,
 				B32D5A812804903E00AF241E /* PhotoPicker.swift in Sources */,
-				B3AEC11728009A9D002AD6CE /* CKRecord+Ext.swift in Sources */,
 				B3F279292807664C00B35885 /* AppTabVM.swift in Sources */,
 				B3F2792C280A0B7A00B35885 /* ProfileSheetView.swift in Sources */,
 				B32D5A872804C74100AF241E /* LoadingView.swift in Sources */,

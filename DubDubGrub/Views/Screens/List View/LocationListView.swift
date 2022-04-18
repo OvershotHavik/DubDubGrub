@@ -12,7 +12,7 @@ struct LocationListView: View {
     @EnvironmentObject private var lm: LocationManager
     @StateObject private var vm = LocationListVM()
     @Environment(\.sizeCategory) var sizeCategory
-    
+    @State private var onAppearHasFired = false
     var body: some View {
         NavigationView{
             List{
@@ -26,7 +26,11 @@ struct LocationListView: View {
                 }
             }
             .onAppear{
-                vm.getCheckedInProfilesDictionary()
+                if !onAppearHasFired{
+                    print("👀 on appeared called")
+                    vm.getCheckedInProfilesDictionary()
+                    onAppearHasFired = true
+                }
             }
             .alert(item: $vm.alertItem, content: {$0.alert})
             .navigationTitle("Grub Spots")
