@@ -35,8 +35,14 @@ struct LocationMapView: View {
                 .accentColor(.grubRed)
                 .ignoresSafeArea(edges: .top)
             
-            LogoView(frameWidth: 125)
-                .shadow(radius: 10)
+            Button {
+                vm.setMapRegionToDefaultLocation()
+            } label: {
+                LogoView(frameWidth: 125)
+                    .shadow(radius: 10)
+            }
+
+
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{

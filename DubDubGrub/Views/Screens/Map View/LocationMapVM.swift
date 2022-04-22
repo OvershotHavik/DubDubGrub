@@ -80,6 +80,16 @@ extension LocationMapView{
                 LocationDetailView(vm: LocationDetailVM(location: location))
             }
         }
+        
+        
+        func setMapRegionToDefaultLocation(){
+            withAnimation {
+                    region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.330642,
+                                                                               longitude: -121.888681),
+                                                span: MKCoordinateSpan(latitudeDelta: 0.01,
+                                                                       longitudeDelta: 0.01))
+            }
+        }
     }
 }
 
