@@ -54,11 +54,12 @@ enum CheckInStatus {
     func callLocation(){
 //        guard let url = URL(string: "tel://\(location.phoneNumber)")
         print(location.phoneNumber)
-        guard let url = URL(string: "tel://\(800-444-4444)") else {
+//        guard let url = URL(string: "tel://\(800-444-4444)") else {
+        guard let url = URL(string: "tel://\(location.phoneNumber)") else {
             alertItem = AlertContext.invalidPhoneNumber
             return
         }
-        
+        print(url)
         if UIApplication.shared.canOpenURL(url){
             UIApplication.shared.open(url)
         } else {

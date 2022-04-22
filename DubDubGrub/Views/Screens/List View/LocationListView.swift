@@ -17,7 +17,7 @@ struct LocationListView: View {
     var body: some View {
         NavigationView{
             List{
-                ForEach(lm.locations) { location in
+                ForEach(vm.searchResults) {location in
                     NavigationLink(destination: vm.createLocationDetailView(for: location, in: dynamicTypeSize)) {
                         LocationListCell(location: location,
                                          profiles: vm.checkedInProfiles[location.id, default: []])
@@ -32,10 +32,15 @@ struct LocationListView: View {
                     await vm.getCheckedInProfilesDictionary()
                     onAppearHasFired = true
                 }
+                vm.originalLocations = lm.locations
+            }
+            .onDisappear{
+                onAppearHasFired = false
             }
             .refreshable {
                 await vm.getCheckedInProfilesDictionary()
             }
+            .searchable(text: $vm.searchText)
             .alert(item: $vm.alertItem, content: {$0.alert})
             .navigationTitle("Grub Spots")
             .listStyle(.plain)

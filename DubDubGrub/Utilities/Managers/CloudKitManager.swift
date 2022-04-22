@@ -19,7 +19,6 @@ final class CloudKitManager {
     
     
     func getUserRecord() async throws{
-        //Get recordID
         let recordID = try await container.userRecordID()
         let record = try await container.publicCloudDatabase.record(for: recordID)
         userRecord = record

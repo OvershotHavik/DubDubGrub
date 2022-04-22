@@ -13,6 +13,22 @@ extension LocationListView{
     @MainActor final class LocationListVM: ObservableObject{
         @Published var checkedInProfiles: [CKRecord.ID: [DDGProfile]] = [:]
         @Published var alertItem: AlertItem?
+        @Published var searchText = ""
+        @Published var originalLocations: [DDGLocation] = []
+        var searchResults: [DDGLocation]{
+            if searchText.isEmpty{
+                return originalLocations
+            }else {
+                var filteredLocations : [CKRecord.ID] = []
+                for item in checkedInProfiles{
+                    if item.value.contains(where: {$0.firstName.containsIgnoringCase(find: searchText)}){
+                        filteredLocations.append(item.key)
+                    }
+                }
+                return originalLocations.filter {filteredLocations.contains($0.id) }
+            }
+        }
+        
         
         func getCheckedInProfilesDictionary() async{
             do {
