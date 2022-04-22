@@ -25,6 +25,7 @@ struct AppTabView: View {
         .task{
             try? await CloudKitManager.shared.getUserRecord()
             vm.checkIfHasSeenOnboard()
+            UIApplication.shared.applicationIconBadgeNumber = 0 // to remove the badge number on the app itself
         }
         .sheet(isPresented: $vm.isShowingOnboardView) {
             OnboardingView()

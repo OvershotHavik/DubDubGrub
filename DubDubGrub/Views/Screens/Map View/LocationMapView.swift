@@ -42,7 +42,6 @@ struct LocationMapView: View {
                     .shadow(radius: 10)
             }
 
-
         }
         .sheet(isPresented: $vm.isShowingDetailView, onDismiss: vm.getCheckedInCounts, content: {
             NavigationView{

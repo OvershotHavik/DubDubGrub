@@ -95,6 +95,7 @@ enum CheckInStatus {
     
     
     func updateCheckInStatus(to checkInStatus: CheckInStatus){
+        NotificationManager.shared.requestAuthorization()
         // Retrieve the DDGProfile
         guard let profileRecordID = CloudKitManager.shared.profileRecordID else {
             alertItem = AlertContext.unableToGetProfile
@@ -125,6 +126,7 @@ enum CheckInStatus {
                 }
                 //update our checkedInProfile array
                 isCheckedIn.toggle()
+                NotificationManager.shared.scheduleNotification(isCheckedIn: isCheckedIn, locationName: location.name)
                 hideLoadingView()
                 print("Checked in/out successfully")
             }catch {

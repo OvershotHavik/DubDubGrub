@@ -38,6 +38,7 @@ struct LocationDetailView: View {
         .task{
             vm.getCheckedInProfiles()
             vm.getCheckedInStatus()
+            UIApplication.shared.applicationIconBadgeNumber = 0 // to remove the badge number on the app itself
         }
         .sheet(isPresented: $vm.isShowingProfileSheet, content: {
             NavigationView{
